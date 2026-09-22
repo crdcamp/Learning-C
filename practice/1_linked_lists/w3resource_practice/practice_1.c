@@ -9,6 +9,7 @@ typedef struct node {
 } node;
 
 // Add free memory function
+//void free_links(meow meow);
 
 // Write a program in C to create and display a Singly Linked List.
 int main(int argc, char *argv[]) {
@@ -40,6 +41,9 @@ int main(int argc, char *argv[]) {
         // to `next` within the node
         n->next = list;
     }
+
+    // Now let's print dis bitch out
+
 
     return 0;
 }
