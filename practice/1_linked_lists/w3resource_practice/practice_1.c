@@ -33,6 +33,10 @@ int main(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
         // Allocate memory for the current node
         node *n = malloc(sizeof(node));
+        if (n == NULL) {
+            printf("Memory allocation didn't go as planned ahhhhhhh!!!!\n");
+            return 1;
+        }
         // Assign the argv integer to the node
         n->number = atoi(argv[i]);
         // Make next null just for safety
@@ -40,10 +44,22 @@ int main(int argc, char *argv[]) {
         // Assign the previous iteration's memory location
         // to `next` within the node
         n->next = list;
+        // Update `list`'s memory start location
+        list = n;
     }
 
     // Now let's print dis bitch out
+    // We use `ptr` instead of directly working with `list` here because
+    // is we were to just use `list` we'd end up editing the starting pointer
+    // for the linked list in the final line, thus losing track of where the
+    // list begins
+    node *ptr = list;
+    while (ptr != NULL) {
+        printf("Number: %i\n", ptr->number);
+        printf("Address: %p\n", ptr->next);
+        ptr = ptr->next;
+    }
 
-
+    // And free that mf memory bbyyyyy
     return 0;
 }
