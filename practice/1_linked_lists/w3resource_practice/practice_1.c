@@ -30,9 +30,14 @@ int main(int argc, char *argv[]) {
     node *list = NULL;
     // Iterate over each argument to assign it to the linked list
     for (int i = 1; i < argc; i++) {
+        // Allocate memory for the current node
         node *n = malloc(sizeof(node));
+        // Assign the argv integer to the node
         n->number = atoi(argv[i]);
+        // Make next null just for safety
         n->next = NULL;
+        // Assign the previous iteration's memory location
+        // to `next` within the node
         n->next = list;
     }
 
