@@ -32,19 +32,24 @@ int main(void) {
         printf("Meow %i\n", ptr->number);
         ptr = ptr->next_node;
     }
+    printf("\n");
 
-    // Reset pointer
-    // YOU'RE GONNA WANNA DEFINE SOME MORE THINGS
-    // UP HERE TO BE ABLE TO TRAVERSE BACKWARDS
-    ptr = list;
     // Print the list in order
     printf("ORDERED uhhhhh... ORDER:\n");
-    while (ptr != NULL) {
-        // Point the next node backwards
-        next = ptr->next_node;
+    node *previous_node;
+    node *current_node;
+    ptr = list;
 
+    if (ptr != NULL) {
+        previous_node = ptr;
+        current_node = current_node->next_node;
+        ptr = ptr->next_node;
+
+        // Convert the first node as last
+        // I think we're essentially reversing the
+        // list by assigning null backwards as we iterate
+        previous_node->next_node = NULL;
     }
 
 return 0;
-
 }

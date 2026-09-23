@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 
     // And free that mf memory bbyyyyy
     while (ptr != NULL) {
-        node *next= ptr->next;
+        node *next = ptr->next;
         free(ptr);
         ptr = next;
     }
