@@ -12,7 +12,7 @@ typedef struct node {
     struct node *next_pointer;
 } node;
 
-node create_linked_linked_list();
+node create_linked_linked_list(int length);
 void print_linked_linked_list(char *message, node *linked_list);
 void free_linked_list(node *linked_list);
 node iterative_reverse_linked_list(node *first_pointer);
@@ -20,7 +20,7 @@ node recursive(node *first_pointer);
 
 int main(void) {
     // Initiate and display original linked list
-    node linked_list = create_linked_linked_list();
+    node linked_list = create_linked_linked_list(5);
     print_linked_linked_list("Original linked list", &linked_list);
 
     // Reverse linked list using the iterative method
@@ -33,12 +33,12 @@ int main(void) {
 }
 
 // Create a linked linked_list that refers to 5 ordered integers
-node create_linked_linked_list() {
+node create_linked_linked_list(int length) {
     // Initiate the linked_list
     node *linked_list = NULL;
 
     // Iterate though only 5 integers
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < length; i++) {
         // Allocate memory for a node
         node *n = malloc(sizeof(node));
         // Assign an integer to the node
