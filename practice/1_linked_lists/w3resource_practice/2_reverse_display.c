@@ -42,13 +42,31 @@ int main(void) {
 
     if (ptr != NULL) {
         previous_node = ptr;
+        // ERROR: CURRENT NODE WAS NEVER INITIALIZED
         current_node = current_node->next_node;
         ptr = ptr->next_node;
-
         // Convert the first node as last
         // I think we're essentially reversing the
         // list by assigning null backwards as we iterate
         previous_node->next_node = NULL;
+
+        while(ptr != NULL) {
+            ptr = ptr->next_node;
+            current_node->next_node = previous_node;
+
+            previous_node = current_node;
+            current_node = ptr;
+        }
+        // Convert the last node as the head node
+        // ERROR: YOU'RE SUPPOSED TO BE EDITING THE LIST,
+        // NOT THE POINTER
+        ptr = previous_node;
+    }
+
+    ptr = list;
+    while (ptr != NULL) {
+        printf("Meow %i\n", ptr->number);
+        ptr = ptr->next_node;
     }
 
 return 0;
