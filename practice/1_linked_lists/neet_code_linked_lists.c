@@ -12,17 +12,18 @@ typedef struct node {
     struct node *next_pointer;
 } node;
 
-node create_linked_linked_list(node first_pointer);
-void print_linked_linked_list(node linked_list);
-node iterative(node first_pointer);
-node recursive(node first_pointer);
+node create_linked_linked_list();
+void print_linked_linked_list(node *linked_list, char *message);
+node iterative(node *first_pointer);
+node recursive(node *first_pointer);
 
 int main(void) {
-    return 0;
+    node linked_list = create_linked_linked_list();
+    print_linked_linked_list(&linked_list, "Original linked list");
 }
 
-// Create a linked linked_list of 5 integers
-node create_linked_linked_list(node first_pointer) {
+// Create a linked linked_list that refers to 5 ordered integers
+node create_linked_linked_list() {
     // Initiate the linked_list
     node *linked_list = NULL;
 
@@ -41,15 +42,21 @@ node create_linked_linked_list(node first_pointer) {
     return *linked_list;
 }
 
-void print_linked_linked_list(node linked_list) {
-    return;
+void print_linked_linked_list(node *linked_list, char *message) {
+    printf("%s: ", message);
+    node *ptr = linked_list;
+    while (ptr != NULL) {
+        printf("%i ", ptr->integer);
+        ptr = ptr->next_pointer;
+    }
+    printf("\n");
 }
 
-node iterative(node first_pointer) {
-    // So, essentially what we want to do here is reverse
-    // the pointers
+// node iterative(node *first_pointer) {
+//     // So, essentially what we want to do here is reverse
+//     // the pointers
 
-    // We can use two pointer for this
-    // Current pointer: initialized a pointer to the first node (head)
-    // Previous pointer: initially set to `NULL`
-}
+//     // We can use two pointer for this
+//     // Current pointer: initialized a pointer to the first node (head)
+//     // Previous pointer: initially set to `NULL`
+// }
