@@ -13,13 +13,14 @@ typedef struct node {
 } node;
 
 node create_linked_linked_list();
-void print_linked_linked_list(node *linked_list, char *message);
+void print_linked_linked_list(char *message, node *linked_list);
+void free_linked_list(node *linked_list);
 node iterative(node *first_pointer);
 node recursive(node *first_pointer);
 
 int main(void) {
     node linked_list = create_linked_linked_list();
-    print_linked_linked_list(&linked_list, "Original linked list");
+    print_linked_linked_list("Original linked list", &linked_list);
 }
 
 // Create a linked linked_list that refers to 5 ordered integers
@@ -38,11 +39,23 @@ node create_linked_linked_list() {
         // Update `linked_list''s location for the next iteration
         linked_list = n;
     }
-
     return *linked_list;
 }
 
-void print_linked_linked_list(node *linked_list, char *message) {
+// Iterate over a linked list to free its memory
+void free_linked_list(node *linked_list) {
+    node *ptr = linked_list;
+    while (ptr != NULL) {
+        // Need to declare `next_pointer` before pointing to the next pointer
+        // Without this, the last line in this loop is referring to memory that
+        // has already been freed (use-after-free error)
+        node *next_pointer = ptr->next_pointer;
+        free(ptr);
+        ptr = next_pointer;
+    }
+}
+
+void print_linked_linked_list(char *message, node *linked_list) {
     printf("%s: ", message);
     node *ptr = linked_list;
     while (ptr != NULL) {
@@ -52,11 +65,13 @@ void print_linked_linked_list(node *linked_list, char *message) {
     printf("\n");
 }
 
-// node iterative(node *first_pointer) {
-//     // So, essentially what we want to do here is reverse
-//     // the pointers
+node iterative(node *first_pointer) {
+    // So, essentially what we want to do here is reverse
+    // the pointers
 
-//     // We can use two pointer for this
-//     // Current pointer: initialized a pointer to the first node (head)
-//     // Previous pointer: initially set to `NULL`
-// }
+    // We can use two pointer for this
+    // Current pointer: initialized a pointer to the first node (head)
+    // Previous pointer: initially set to `NULL`
+
+
+}
