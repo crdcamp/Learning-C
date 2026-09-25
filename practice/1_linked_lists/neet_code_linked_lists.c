@@ -12,12 +12,17 @@ typedef struct node {
     struct node *next_pointer;
 } node;
 
+// General functions
 node *create_linked_list(int length);
 void print_linked_list(char *message, node *linked_list);
 void free_linked_list(node *linked_list);
+
+// Functions for reversing the linked list
 node *iterative_reverse_linked_list(node *first_pointer);
 node *recursive_reverse_linked_list(node *first_pointer);
 
+// NOTE that we're only allocating the original linked list to the heap here
+// The reversed linked lists are not
 int main(void) {
     // Initiate and display original linked list
     node *linked_list = create_linked_list(5);
@@ -30,9 +35,9 @@ int main(void) {
     // Reverse linked list using an iterative method
     node *iterative_reversed_linked_list = iterative_reverse_linked_list(linked_list);
     print_linked_list("Iterative linked list", iterative_reversed_linked_list);
-    free_linked_list(iterative_reversed_linked_list);
 
     // Reverse the linked list using a recursive method
+    node *recursive_reversed_linked_list = recursive_reverse_linked_list(linked_list);
 
     // Free memory
     free_linked_list(linked_list);
@@ -99,8 +104,10 @@ node *iterative_reverse_linked_list(node *linked_list) {
         node *next_node = current_node->next_pointer;
         // Assign current node as previous node
         current_node->next_pointer = previous_node;
+        // Move previous node one step further
+        previous_node = current_node;
         // Iterate to next node
         current_node = next_node;
     }
-    return current_node;
+    return previous_node;
 }
