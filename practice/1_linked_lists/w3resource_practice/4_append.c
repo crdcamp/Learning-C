@@ -40,8 +40,12 @@ int main(int argc, char *argv[]) {
 
     // Append to the list
     list = append_list(list);
+    if (list == NULL) {
+        return 1;
+    }
     print_list("Appended: ", list);
 
+    // AND NOTHING HURTS ANYMORE, I FEEL KINDA FREEEEEEEEEEE!!!!
     free_list(list);
 
     return 0;
@@ -136,6 +140,10 @@ void *append_list(node *list) {
         if (current_node->next_node == NULL) {
             // Allocate memory for the appending node
             node *append_node = malloc(sizeof(node));
+            if (append_node == NULL) {
+                printf("Error allocating memory when appending node\n");
+                return NULL;
+            }
             // ADD ERROR HANDLING FOR THIS MEMORY ALLOCATION!!!!
             // Assign the previuos node's integer + 1
             append_node->integer = previous_node->integer+1;
@@ -145,7 +153,6 @@ void *append_list(node *list) {
             append_node->next_node = NULL;
             return append_node;
         }
-
         current_node = next_node;
     }
     return NULL;
