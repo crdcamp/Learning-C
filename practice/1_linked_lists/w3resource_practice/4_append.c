@@ -140,16 +140,23 @@ void *append_list(node *list) {
         if (current_node->next_node == NULL) {
             // Allocate memory for the appending node
             node *append_node = malloc(sizeof(node));
+
+            // Error handling (ignore when trying to figure out logic)
             if (append_node == NULL) {
-                printf("Error allocating memory when appending node\n");
+                printf("Error allocating memory when appending node\n")
+                while (list != NULL) {
+                    node *tmp = list;
+                    free(tmp);
+                    list = append_node->next_node;
+                }
                 return NULL;
             }
-            // ADD ERROR HANDLING FOR THIS MEMORY ALLOCATION!!!!
+
             // Assign the previuos node's integer + 1
             append_node->integer = previous_node->integer+1;
             // Make the appended node the final node
             current_node->next_node = append_node;
-            // Assign append_node's next node as NULL
+            // Assign append_node's next node as NULL so the while loop terminates
             append_node->next_node = NULL;
             return append_node;
         }
