@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,7 +13,7 @@ node *create_list(int length);
 void free_list(node *list);
 void print_list(char *message, node *list);
 void *sort_list(node *list);
-void append_to_list(node *list);
+void *append_list(node *list);
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -26,14 +27,20 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // Create original list
     int length = atoi(argv[1]);
     node *list = create_list(length);
     if (list == NULL)
         return 1;
-
     print_list("Original: ", list);
+
+    // Sort the list
     list = sort_list(list);
     print_list("Sorted: ", list);
+
+    // Append to the list
+    list = append_list(list);
+    print_list("Appended: ", list);
 
     free(list);
 
@@ -109,6 +116,19 @@ void *sort_list(node *list) {
     return previous_node;
 }
 
-void append_to_list(node *list) {
-    printf("Implement the sort before continuing with this function\n");
+// Append to the list with a number that's 1 greater
+// than the last entry in the list prior to appending
+void *append_list(node *list) {
+    // So this is definitely gonna involve iterating over
+    // the list until we read a null value
+    // We're also gonna make it append the final value + 1 just for funsies
+    // So let's start with a while loop that takes us to the end and
+    // see where we go from there
+    *current_node = list;
+    while (current_node != NULL) {
+        // Iterate until we reach NULL
+
+        // When we reach NULL, create a new pointer
+        // and store the previous value +1 there
+    }
 }
