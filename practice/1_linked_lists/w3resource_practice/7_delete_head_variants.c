@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 // Write a program in C to delete the first node of a Singly Linked List.
+// Some reason I keep changing my variable names for the node pointers
+// cause I can't seems to decide what the best convention for that is
 typedef struct node {
     int integer;
     struct node *next_node;
@@ -9,6 +11,7 @@ typedef struct node {
 
 node *create_list(int length);
 void print_list(char *message, node *list);
+node *delete_head(node *list);
 void free_list(node *list);
 
 int main(void) {
@@ -19,7 +22,9 @@ int main(void) {
     if (list == NULL) return 1;
     print_list("Original list: ", list);
 
-
+    // Remove the first entry in the list and print
+    list = delete_head(list);
+    print_list("New list: ", list);
 
     return 0;
 }
@@ -58,6 +63,13 @@ void print_list(char *message, node *list) {
     printf("\n");
 }
 
-
+node *delete_head(node *list) {
+    // Think we can just free the
+    // memory of the first node
+    node *head = list;
+    list = head->next_node;
+    free(head);
+    return list;
+}
 
 //void free_list(node *list)
