@@ -27,7 +27,6 @@ int main(void) {
     // Initiate and display original linked list
     node *linked_list = create_linked_list(5);
     print_linked_list("Original linked list", linked_list);
-    // If `create_linked_list` fails to allocate memory, exit the program
     if (linked_list == NULL) {
         return 1;
     }
@@ -37,13 +36,16 @@ int main(void) {
     print_linked_list("Iterative linked list", iterative_reversed_linked_list);
 
     // Reverse the linked list using a recursive method
-    node *recursive_reversed_linked_list = recursive_reverse_linked_list(linked_list);
+    //node *recursive_reversed_linked_list = recursive_reverse_linked_list(linked_list);
 
     // Free memory
     free_linked_list(linked_list);
 }
 
 // Create a linked linked_list that refers to 5 ordered integers
+// Note that we're assigning the results of these functions as pointers
+// This is because we want to assign the result to a memory address
+// Without assigning the result to a memory address,
 node *create_linked_list(int length) {
     // Initiate the linked_list
     node *linked_list = NULL;
@@ -54,6 +56,13 @@ node *create_linked_list(int length) {
         node *n = malloc(sizeof(node));
         if (n == NULL) {
             printf("ERROR: Failed to allocate memory when creating linked list\n");
+            // Make sure to free previously allocated memory if memory allocation fails part way through
+            while (linked_list != NULL) {
+                node *tmp_pointer = linked_list;
+                linked_list = linked_list->next_pointer;
+                free(tmp_pointer);
+            }
+            // Return null and exit program in `main`
             return NULL;
         }
         // Assign an integer to the node
@@ -91,12 +100,6 @@ void print_linked_list(char *message, node *linked_list) {
 }
 
 node *iterative_reverse_linked_list(node *linked_list) {
-    // So, essentially what we want to do here is reverse
-    // the pointers
-
-    // We can use two pointer for this
-    // Current pointer: initialized a pointer to the first node (head)
-    // Previous pointer: initially set to `NULL`
     node *current_node = linked_list;
     node *previous_node = NULL;
     while(current_node != NULL) {
