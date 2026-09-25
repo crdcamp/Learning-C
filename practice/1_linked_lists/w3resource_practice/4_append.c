@@ -132,7 +132,6 @@ void *append_list(node *list) {
     node *previous_node = NULL;
     while (current_node != NULL) {
         // Iterate until we reach NULL
-        printf("Current iteration: %i\n", current_node->integer);
         node *next_node = current_node->next_node;
         previous_node = current_node;
 
@@ -143,7 +142,7 @@ void *append_list(node *list) {
 
             // Error handling (ignore when trying to figure out logic)
             if (append_node == NULL) {
-                printf("Error allocating memory when appending node\n")
+                printf("Error allocating memory when appending node\n");
                 while (list != NULL) {
                     node *tmp = list;
                     free(tmp);
@@ -158,7 +157,7 @@ void *append_list(node *list) {
             current_node->next_node = append_node;
             // Assign append_node's next node as NULL so the while loop terminates
             append_node->next_node = NULL;
-            return append_node;
+            return list;
         }
         current_node = next_node;
     }
