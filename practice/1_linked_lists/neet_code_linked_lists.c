@@ -22,7 +22,7 @@ int main(void) {
     // Initiate and display original linked list
     node *linked_list = create_linked_list(5);
     print_linked_list("Original linked list", linked_list);
-    // If create_linked_list fails, exit the program
+    // If `create_linked_list` fails to allocate memory, exit the program
     if (linked_list == NULL) {
         return 1;
     }
@@ -48,7 +48,7 @@ node *create_linked_list(int length) {
         // Allocate memory for a node
         node *n = malloc(sizeof(node));
         if (n == NULL) {
-            printf("Error allocating memory when creating linked list\n");
+            printf("ERROR: Failed to allocate memory when creating linked list\n");
             return NULL;
         }
         // Assign an integer to the node
