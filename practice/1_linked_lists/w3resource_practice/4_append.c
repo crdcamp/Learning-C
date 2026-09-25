@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     list = append_list(list);
     print_list("Appended: ", list);
 
-    free(list);
+    free_list(list);
 
     return 0;
 }
@@ -124,11 +124,16 @@ void *append_list(node *list) {
     // We're also gonna make it append the final value + 1 just for funsies
     // So let's start with a while loop that takes us to the end and
     // see where we go from there
-    *current_node = list;
+    node *current_node = list;
     while (current_node != NULL) {
         // Iterate until we reach NULL
 
         // When we reach NULL, create a new pointer
         // and store the previous value +1 there
+        printf("Test value: %i\n", current_node->integer);
+        node *next_node = current_node->next_node;
+        current_node = next_node;
     }
+
+    return current_node;
 }
