@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 // Write a program in C to create a singly linked list of n nodes and count the number of nodes.
+// This one is too easy. NEXT!
 typedef struct node {
     int integer;
     struct node *next_node;
