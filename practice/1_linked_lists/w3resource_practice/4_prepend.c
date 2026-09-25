@@ -19,8 +19,11 @@ int main(void) {
     if (list == NULL) {
         return 1;
     }
-
     print_list("Original list: ", list);
+
+    list = sort_list(list);
+    print_list("Sorted list: ", list);
+
     // prepend_list(list);
     // free_list(list);
 
@@ -63,7 +66,9 @@ void *sort_list(node *list) {
     node *current_node = list;
     while (current_node != NULL) {
         node *next_node = current_node->next_node;
-
+        current_node->next_node = previous_node;
         previous_node = current_node;
+        current_node = next_node;
     }
+    return previous_node;
 }
