@@ -11,7 +11,7 @@ typedef struct node {
 node *create_list(int length);
 void free_list(node *list);
 void print_list(char *message, node *list);
-void sort_list(node *list);
+void *sort_list(node *list);
 void append_to_list(node *list);
 
 int main(int argc, char *argv[]) {
@@ -32,8 +32,12 @@ int main(int argc, char *argv[]) {
         return 1;
 
     print_list("Original: ", list);
+    list = sort_list(list);
+    print_list("Sorted: ", list);
 
     free(list);
+
+    return 0;
 }
 
 node *create_list(int length) {
@@ -62,6 +66,7 @@ node *create_list(int length) {
     return list;
 }
 
+// Visit each node in the list and free its memory
 void free_list(node *list) {
     node *ptr = list;
     while (ptr != NULL) {
@@ -71,6 +76,7 @@ void free_list(node *list) {
     }
 }
 
+// Print a list
 void print_list(char *message, node *list) {
     printf("%s", message);
     node *ptr = list;
@@ -82,8 +88,27 @@ void print_list(char *message, node *list) {
     printf("\n");
 }
 
+// Ya gotta sort the list before you append to it
+// Edit the list so it sorts the original list
+void *sort_list(node *list) {
+    node *current_node = list;
+    node *previous_node = NULL;
+    while (current_node != NULL) {
+        node *next_node = current_node->next_node;
+        current_node->next_node = previous_node;
+        previous_node = current_node;
+        current_node = next_node;
+    }
+    // We return the previous node because first of all, `current_node`
+    // is guaranteed to be `NULL`, so that's a pretty clear reason you
+    // shouldn't return it.
+    // However, the actual reason is because just take a quick look:
+    // `previous_node` is assigned to `current_node` before `current_node`
+    // is assigned to `next_node`. Therefore, you're instincts were correct,
+    // but you didn't read the code closely enough buddayyyyyyy
+    return previous_node;
+}
+
 void append_to_list(node *list) {
-
-
-    printf("Working on it\n");
+    printf("Implement the sort before continuing with this function\n");
 }
