@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,5 +16,13 @@ node *insert_middle(node *list);
 void free_list(node *list);
 
 int main(void) {
+    // Now we're gonna work with multiple lengths just to
+    // be absolutely certain we're doing this right
+    int lengths[] = {5, 7, 10};
+
     return 0;
 }
+
+// node create_list(int length) {
+
+// }
