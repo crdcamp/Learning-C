@@ -13,24 +13,24 @@ typedef struct node {
 } node;
 
 node *create_linked_list(int length);
-void print_linked_linked_list(char *message, node *linked_list);
+void print_linked_list(char *message, node *linked_list);
 void free_linked_list(node *linked_list);
-node iterative_reverse_linked_list(node *first_pointer);
-node recursive(node *first_pointer);
+node *iterative_reverse_linked_list(node *first_pointer);
+node *recursive_reverse_linked_list(node *first_pointer);
 
 int main(void) {
     // Initiate and display original linked list
     node *linked_list = create_linked_list(5);
-    print_linked_linked_list("Original linked list", linked_list);
-
+    print_linked_list("Original linked list", linked_list);
     // If create_linked_list fails, exit the program
     if (linked_list == NULL) {
         return 1;
     }
 
     // Reverse linked list using an iterative method
-    node iterative_reversed_linked_list = iterative_reverse_linked_list(linked_list);
-    print_linked_linked_list("Iterative linked list", &iterative_reversed_linked_list);
+    node *iterative_reversed_linked_list = iterative_reverse_linked_list(linked_list);
+    print_linked_list("Iterative linked list", iterative_reversed_linked_list);
+    free_linked_list(iterative_reversed_linked_list);
 
     // Reverse the linked list using a recursive method
 
@@ -75,7 +75,7 @@ void free_linked_list(node *linked_list) {
 }
 
 // Iterate over a linked list to print each entry in it
-void print_linked_linked_list(char *message, node *linked_list) {
+void print_linked_list(char *message, node *linked_list) {
     printf("%s: ", message);
     node *ptr = linked_list;
     while (ptr != NULL) {
@@ -85,7 +85,7 @@ void print_linked_linked_list(char *message, node *linked_list) {
     printf("\n");
 }
 
-node iterative_reverse_linked_list(node *linked_list) {
+node *iterative_reverse_linked_list(node *linked_list) {
     // So, essentially what we want to do here is reverse
     // the pointers
 
@@ -93,17 +93,14 @@ node iterative_reverse_linked_list(node *linked_list) {
     // Current pointer: initialized a pointer to the first node (head)
     // Previous pointer: initially set to `NULL`
     node *current_node = linked_list;
+    node *previous_node = NULL;
     while(current_node != NULL) {
         // Define next node
         node *next_node = current_node->next_pointer;
-        if (next_node == NULL) {
-            break;
-        }
-
-
+        // Assign current node as previous node
+        current_node->next_pointer = previous_node;
         // Iterate to next node
         current_node = next_node;
     }
-
-    return *current_node;
+    return current_node;
 }
