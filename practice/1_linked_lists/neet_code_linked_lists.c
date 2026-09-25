@@ -101,13 +101,17 @@ void print_linked_list(char *message, node *linked_list) {
 
 node *iterative_reverse_linked_list(node *linked_list) {
     node *current_node = linked_list;
-    node *previous_node = NULL;
+    node *previous_node = NULL; // Defined as `NULL` so we can put `NULL` on the opposite end of the linked list
     while(current_node != NULL) {
         // Define next node
         node *next_node = current_node->next_pointer;
         // Assign current node as previous node
+        // Since it was already defined as `NULL`, we've already taken
+        // care of putting `NULL` on the other end of the list.
+        // When considering the rest of the iterations, `previous_node` (as you can see in the next line)
+        // is assigned as `current_node`, thus enabling us to reverse the pointer's direction
         current_node->next_pointer = previous_node;
-        // Move previous node one step further
+        // Move previous node one step further (the final step for ensuring the above line works in future iterations)
         previous_node = current_node;
         // Iterate to next node
         current_node = next_node;
