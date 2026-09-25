@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Check if user is inputting a digit (insufficient check)
-    if (!isdigit(*argv[1])) {
+    if (!isdigit(argv[1])) {
         printf("Please provide a digit as a parameter\n");
         return 1;
     }

@@ -1,16 +1,18 @@
-// Write a program in C to insert a new node at the end of a Singly Linked List.
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+// Write a program in C to insert a new node at the end of a Singly Linked List.
 typedef struct node {
     int integer;
     struct node *next_node;
 } node;
 
-node *create_linked_list(int length);
-void free_linked_list(node *linked_list);
-void print_linked_list(node linked_list);
+node *create_list(int length);
+void free_list(node *list);
+void print_list(char *message, node *list);
+void sort_list(node *list);
+void append_to_list(node *list);
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -19,31 +21,33 @@ int main(int argc, char *argv[]) {
     }
 
     // Yet another inusfficent `int` type check
-    int length = atoi(argv[1]);
-    if (!isdigit(length)) {
+    if (!isdigit(*argv[1])) {
         printf("Input parameter must be a digit\n");
         return 1;
     }
 
-    node *linked_list = create_linked_list(length);
-    if (linked_list == NULL)
+    int length = atoi(argv[1]);
+    node *list = create_list(length);
+    if (list == NULL)
         return 1;
 
-    free(linked_list);
+    print_list("Original: ", list);
+
+    free(list);
 }
 
-node *create_linked_list(int length) {
+node *create_list(int length) {
     // Create null pointer
-    node *linked_list = NULL;
+    node *list = NULL;
     // Populate with data according to `length`
     for (int i = 0; i < length; i++) {
         // Allocate space for a node
         node *n = malloc(sizeof(node));
         if (n == NULL) {
             printf("Error allocating memory\n");
-            while (linked_list != NULL) {
-                node *tmp = linked_list;
-                linked_list = n->next_node;
+            while (list != NULL) {
+                node *tmp = list;
+                list = n->next_node;
                 free(tmp);
             }
             return NULL;
@@ -51,18 +55,35 @@ node *create_linked_list(int length) {
         // Fill `integer` with an `int`
         n->integer = i + 1;
         // Populate next node
-        n->next_node = linked_list;
+        n->next_node = list;
         // Assign allocated memory to linked list for next iteration
-        linked_list = n;
+        list = n;
     }
-    return linked_list;
+    return list;
 }
 
-void free_linked_list(node *linked_list) {
-    node *ptr = linked_list;
+void free_list(node *list) {
+    node *ptr = list;
     while (ptr != NULL) {
         node *next_node = ptr->next_node;
         free(ptr);
         ptr = next_node;
     }
+}
+
+void print_list(char *message, node *list) {
+    printf("%s", message);
+    node *ptr = list;
+    while (ptr != NULL) {
+        printf("%i ", ptr->integer);
+        node *next_node = ptr->next_node;
+        ptr = next_node;
+    }
+    printf("\n");
+}
+
+void append_to_list(node *list) {
+
+
+    printf("Working on it\n");
 }
