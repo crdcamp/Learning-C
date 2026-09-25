@@ -20,7 +20,6 @@ void free_linked_list(node *linked_list);
 
 // Functions for reversing the linked list
 node *iterative_reverse_linked_list(node *first_pointer);
-node *recursive_reverse_linked_list(node *first_pointer);
 
 // NOTE that we're only allocating the original linked list to the heap here
 // The reversed linked lists are not
@@ -51,10 +50,7 @@ int main(int argc, char *argv[]) {
     node *iterative_reversed_linked_list = iterative_reverse_linked_list(linked_list);
     print_linked_list("Iterative revered linked list: ", iterative_reversed_linked_list);
 
-    // Reverse the linked list using a recursive method
-    //node *recursive_reversed_linked_list = recursive_reverse_linked_list(linked_list);
-
-    // Free memory
+    // Neva forget to free memory
     free_linked_list(linked_list);
 }
 
@@ -133,20 +129,4 @@ node *iterative_reverse_linked_list(node *linked_list) {
         current_node = next_node;
     }
     return previous_node;
-}
-
-
-node *recursive_reverse_linked_list(node *first_pointer) {
-    // We need:
-    // A base case
-    // A recursive case
-
-    // The base case can be kinda translated from the while loop
-    // in the iterative example:
-    node *current_node = first_pointer;
-    if (current_node != NULL) {
-        // Then we somehow express the recursive case here
-    }
-
-    return NULL;
 }
