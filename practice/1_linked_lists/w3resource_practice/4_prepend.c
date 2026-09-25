@@ -9,8 +9,8 @@ typedef struct node {
 
 node *create_list(int length);
 void print_list(char *message, node *list);
-void *sort_list(node *list);
-void *prepend_list(node *list, int value_to_append);
+node *sort_list(node *list);
+node *prepend_list(node *list, int value_to_append);
 void free_list(node *list);
 
 int main(void) {
@@ -24,10 +24,10 @@ int main(void) {
     list = sort_list(list);
     print_list("Sorted: ", list);
 
-    list = prepend_list(list);
+    list = prepend_list(list, 67);
     print_list("Prepended: ", list);
 
-    //free_list(list);
+    free_list(list);
 
     return 0;
 }
@@ -63,7 +63,7 @@ void print_list(char *message, node *list) {
     printf("\n");
 }
 
-void *sort_list(node *list) {
+node *sort_list(node *list) {
     node *previous_node = NULL;
     node *current_node = list;
     while (current_node != NULL) {
@@ -75,11 +75,28 @@ void *sort_list(node *list) {
     return previous_node;
 }
 
-void *prepend_list(node *list, int value_to_append) {
-    // Need to allocate new memory for the appended node
+node *prepend_list(node *list, int value_to_append) {
+    // Allocate memory for the node to append
     node *appended_node = malloc(sizeof(node));
-    // Now we need to somehow prepend the allocated memory
-    // Given that `list` itself is the beginning, I think you
-    // can do this without iterating through the entire thing
+    if (appended_node == NULL) {
+        // No need for all that mumbo jumbo. The original list isn't edited at all
+        printf("Error allocating memory during list creation\n");
+        return list;
+    }
+    // Insert integer value from function parameter into node to append
+    appended_node->integer = value_to_append;
+    // Ensure that the appended element points to the original first element
+    appended_node->next_node = list;
+    // Finally, append dat node
     list = appended_node;
+    return list;
+}
+
+void free_list(node *list) {
+    node *current_node = list;
+    while (current_node != NULL) {
+        node *next_node = current_node->next_node;
+        free(current_node);
+        current_node = next_node;
+    }
 }
