@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,17 +24,32 @@ node *recursive_reverse_linked_list(node *first_pointer);
 
 // NOTE that we're only allocating the original linked list to the heap here
 // The reversed linked lists are not
-int main(void) {
+int main(int argc, char *argv[]) {
+    // Ensure only one parameter is provided
+    if (argc != 2) {
+        printf("Incorrect parameter entry. Usage: %s `int`\n", argv[0]);
+        return 1;
+    }
+
+    // Check if user is inputting a digit (insufficient check)
+    if (!isdigit(*argv[1])) {
+        printf("Please provide a digit as a parameter\n");
+        return 1;
+    }
+
+    // Convert user input to a digit
+    int length = atoi(argv[1]);
+
     // Initiate and display original linked list
-    node *linked_list = create_linked_list(5);
-    print_linked_list("Original linked list", linked_list);
+    node *linked_list = create_linked_list(length);
+    print_linked_list("Original linked list: ", linked_list);
     if (linked_list == NULL) {
         return 1;
     }
 
     // Reverse linked list using an iterative method
     node *iterative_reversed_linked_list = iterative_reverse_linked_list(linked_list);
-    print_linked_list("Iterative linked list", iterative_reversed_linked_list);
+    print_linked_list("Iterative revered linked list: ", iterative_reversed_linked_list);
 
     // Reverse the linked list using a recursive method
     //node *recursive_reversed_linked_list = recursive_reverse_linked_list(linked_list);
@@ -90,7 +106,7 @@ void free_linked_list(node *linked_list) {
 
 // Iterate over a linked list to print each entry in it
 void print_linked_list(char *message, node *linked_list) {
-    printf("%s: ", message);
+    printf("%s", message);
     node *ptr = linked_list;
     while (ptr != NULL) {
         printf("%i ", ptr->integer);
