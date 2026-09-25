@@ -12,7 +12,7 @@ typedef struct node {
     struct node *next_pointer;
 } node;
 
-// General functions
+// General use functions
 node *create_linked_list(int length);
 void print_linked_list(char *message, node *linked_list);
 void free_linked_list(node *linked_list);
