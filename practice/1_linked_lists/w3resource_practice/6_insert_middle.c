@@ -12,7 +12,7 @@ node *create_list(int length);
 void print_list(char *message, node *list);
 node *sort_list(node *list);
 int get_list_length(node *list);
-node *insert_middle(node *list);
+void insert_middle(node *list);
 void free_list(node *list);
 
 int main(void) {
@@ -30,8 +30,8 @@ int main(void) {
     }
 
     for (int i = 0; i < list_lengths_length; i++) {
-        int list_length = get_list_length(lists[i]);
-        printf("List %i length: %i\n", i + 1, list_length);
+        printf("List %i ", i + 1);
+        insert_middle(lists[i]);
     }
 
     return 0;
@@ -83,4 +83,10 @@ int get_list_length(node *list) {
     }
 
     return list_length;
+}
+
+void insert_middle(node *list) {
+    int list_length = get_list_length(list);
+    int middle_index = list_length / 2;
+    printf("middle index: %i\n", middle_index);
 }
