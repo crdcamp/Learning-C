@@ -22,6 +22,24 @@ int main(void) {
     return 0;
 }
 
-// node create_list(int length) {
+node *create_list(int length) {
+    node *list = NULL;
+    for (int i = 0; i < length; i++) {
+        node *n = malloc(sizeof(node));
 
-// }
+        if (n == NULL) {
+            printf("Error allocating memory when creating list\n");
+            while (list != NULL) {
+                node *tmp = list;
+                list = n->next_node;
+                free(tmp);
+            }
+            return NULL;
+        }
+
+        n->integer = i + 1;
+        n->next_node = list;
+        list = n;
+    }
+    return list;
+}
