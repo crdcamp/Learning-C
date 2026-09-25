@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 
+#include <stdlib.h>
 // Write a program in C to insert a node in the middle of a Singly Linked List.
 
 typedef struct node {
@@ -12,7 +12,7 @@ node *create_list(int length);
 void print_list(char *message, node *list);
 node *sort_list(node *list);
 int get_list_length(node *list);
-void insert_middle(node *list);
+node *insert_middle(node *list, int value_to_insert);
 void free_list(node *list);
 
 int main(void) {
@@ -23,15 +23,21 @@ int main(void) {
     node *lists[list_lengths_length] = {};
 
     // Populate three different linked lists with different amounts of data
+    printf("BEFORE INSERTING MIDDLE VALUE:\n");
     for (int i = 0; i < list_lengths_length; i++) {
         lists[i] = create_list(list_lengths[i]);
         printf("List %i: ", i + 1);
         print_list("", lists[i]);
     }
 
+    printf("AFTER INSERTING MIDDLE VALUE:\n");
     for (int i = 0; i < list_lengths_length; i++) {
-        printf("List %i ", i + 1);
-        insert_middle(lists[i]);
+        printf("List %i: ", i + 1);
+        node *list = insert_middle(lists[i], 676967);
+        if (list == NULL) {
+            return 1;
+        }
+        print_list("", lists[i]);
     }
 
     return 0;
@@ -85,8 +91,32 @@ int get_list_length(node *list) {
     return list_length;
 }
 
-void insert_middle(node *list) {
+node *insert_middle(node *list, int value_to_insert) {
+    // Get the length of the list
     int list_length = get_list_length(list);
+    // Find the middle index
     int middle_index = list_length / 2;
-    printf("middle index: %i\n", middle_index);
+
+    // No need for a `while` loop here. Just iterate with a `for` loop
+    // until you reach the middle index
+    node *current_node = list;
+    for (int i = 0; i < middle_index - 1; i++) {
+        // Iterate until you reach the middle
+        current_node = current_node->next_node;
+    }
+    // Allocate memory for `value_to_insert`
+    node *middle_node = malloc(sizeof(node));
+    if (middle_node == NULL) {
+        printf("Error when assigning memory for middle index\n");
+        return NULL;
+    }
+
+    // Insert `value_to_insert` into `middle_node`
+    middle_node->integer = value_to_insert;
+    // Tie `middle_node` to the next node
+    middle_node->next_node = current_node->next_node;
+    // Tie previous node to middle node
+    current_node->next_node = middle_node;
+
+    return list;
 }
