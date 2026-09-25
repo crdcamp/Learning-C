@@ -10,8 +10,8 @@ typedef struct node {
 node *create_list(int length);
 void print_list(char *message, node *list);
 void *sort_list(node *list);
+void *prepend_list(node *list, int value_to_append);
 void free_list(node *list);
-void *prepend_list(node *list);
 
 int main(void) {
     int length = 5;
@@ -19,13 +19,15 @@ int main(void) {
     if (list == NULL) {
         return 1;
     }
-    print_list("Original list: ", list);
+    print_list("Original: ", list);
 
     list = sort_list(list);
-    print_list("Sorted list: ", list);
+    print_list("Sorted: ", list);
 
-    // prepend_list(list);
-    // free_list(list);
+    list = prepend_list(list);
+    print_list("Prepended: ", list);
+
+    //free_list(list);
 
     return 0;
 }
@@ -71,4 +73,13 @@ void *sort_list(node *list) {
         current_node = next_node;
     }
     return previous_node;
+}
+
+void *prepend_list(node *list, int value_to_append) {
+    // Need to allocate new memory for the appended node
+    node *appended_node = malloc(sizeof(node));
+    // Now we need to somehow prepend the allocated memory
+    // Given that `list` itself is the beginning, I think you
+    // can do this without iterating through the entire thing
+    list = appended_node;
 }
