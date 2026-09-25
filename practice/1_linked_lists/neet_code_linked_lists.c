@@ -12,7 +12,7 @@ typedef struct node {
     struct node *next_pointer;
 } node;
 
-node create_linked_linked_list(int length);
+node *create_linked_list(int length);
 void print_linked_linked_list(char *message, node *linked_list);
 void free_linked_list(node *linked_list);
 node iterative_reverse_linked_list(node *first_pointer);
@@ -20,20 +20,26 @@ node recursive(node *first_pointer);
 
 int main(void) {
     // Initiate and display original linked list
-    node linked_list = create_linked_linked_list(5);
-    print_linked_linked_list("Original linked list", &linked_list);
+    node *linked_list = create_linked_list(5);
+    print_linked_linked_list("Original linked list", linked_list);
 
-    // Reverse linked list using the iterative method
-    node iterative_reversed_linked_list = iterative_reverse_linked_list(&linked_list);
+    // If create_linked_list fails, exit the program
+    if (linked_list == NULL) {
+        return 1;
+    }
+
+    // Reverse linked list using an iterative method
+    node iterative_reversed_linked_list = iterative_reverse_linked_list(linked_list);
     print_linked_linked_list("Iterative linked list", &iterative_reversed_linked_list);
 
-    // Reverse the linked list using the recursive method
+    // Reverse the linked list using a recursive method
 
-    // Free all memory
+    // Free memory
+    free_linked_list(linked_list);
 }
 
 // Create a linked linked_list that refers to 5 ordered integers
-node create_linked_linked_list(int length) {
+node *create_linked_list(int length) {
     // Initiate the linked_list
     node *linked_list = NULL;
 
@@ -41,6 +47,10 @@ node create_linked_linked_list(int length) {
     for (int i = 0; i < length; i++) {
         // Allocate memory for a node
         node *n = malloc(sizeof(node));
+        if (n == NULL) {
+            printf("Error allocating memory when creating linked list\n");
+            return NULL;
+        }
         // Assign an integer to the node
         n->integer = i + 1;
         // Assign a location for the next pointer
@@ -48,7 +58,7 @@ node create_linked_linked_list(int length) {
         // Update `linked_list''s location for the next iteration
         linked_list = n;
     }
-    return *linked_list;
+    return linked_list;
 }
 
 // Iterate over a linked list to free its memory
@@ -82,14 +92,18 @@ node iterative_reverse_linked_list(node *linked_list) {
     // We can use two pointer for this
     // Current pointer: initialized a pointer to the first node (head)
     // Previous pointer: initially set to `NULL`
-    node *ptr = linked_list;
-    node *previous_node;
-    while(ptr != NULL) {
-        // Define the next node before reassigning it to the previous node
-        node *next_node = ptr->next_pointer;
-        // Assign the previous node to the next node
-        previous_node = ptr;
+    node *current_node = linked_list;
+    while(current_node != NULL) {
+        // Define next node
+        node *next_node = current_node->next_pointer;
+        if (next_node == NULL) {
+            break;
+        }
+
+
+        // Iterate to next node
+        current_node = next_node;
     }
 
-    return *ptr;
+    return *current_node;
 }
