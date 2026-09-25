@@ -125,15 +125,21 @@ void *append_list(node *list) {
     // So let's start with a while loop that takes us to the end and
     // see where we go from there
     node *current_node = list;
+    node *previous_node = NULL;
     while (current_node != NULL) {
         // Iterate until we reach NULL
-
-        // When we reach NULL, create a new pointer
-        // and store the previous value +1 there
-        printf("Test value: %i\n", current_node->integer);
+        printf("Current iteration: %i\n", current_node->integer);
         node *next_node = current_node->next_node;
+        previous_node = current_node;
         current_node = next_node;
-    }
 
+        // When we reach the node before the NULL node
+        if (current_node->next_node == NULL)
+            // Allocate memory for the appending node
+            node *append_node = malloc(sizeof(node));
+            // Assign the previuos node's integer + 1
+            append_node->integer = previous_node->integer+1;
+
+    }
     return current_node;
 }
