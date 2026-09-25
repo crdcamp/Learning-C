@@ -134,3 +134,19 @@ node *iterative_reverse_linked_list(node *linked_list) {
     }
     return previous_node;
 }
+
+
+node *recursive_reverse_linked_list(node *first_pointer) {
+    // We need:
+    // A base case
+    // A recursive case
+
+    // The base case can be kinda translated from the while loop
+    // in the iterative example:
+    node *current_node = first_pointer;
+    if (current_node != NULL) {
+        // Then we somehow express the recursive case here
+    }
+
+    return NULL;
+}
