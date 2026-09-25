@@ -134,11 +134,13 @@ void *append_list(node *list) {
         current_node = next_node;
 
         // When we reach the node before the NULL node
-        if (current_node->next_node == NULL)
+        if (current_node->next_node == NULL) {
             // Allocate memory for the appending node
             node *append_node = malloc(sizeof(node));
             // Assign the previuos node's integer + 1
             append_node->integer = previous_node->integer+1;
+            //
+        }
 
     }
     return current_node;
