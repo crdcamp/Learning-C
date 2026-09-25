@@ -12,6 +12,7 @@ node *create_list(int length);
 void print_list(char *message, node *list);
 node *sort_list(node *list);
 node *insert_middle(node *list);
+void free_list(node *list);
 
 int main(void) {
     return 0;
