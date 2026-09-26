@@ -38,7 +38,7 @@ node *create_list(int length) {
         node *n = malloc(node_size);
         if (n == NULL) {
             printf("Error allocating memory when creating list\n");
-            while (n != NULL) {
+            while (list != NULL) {
                 node *tmp = list;
                 list = tmp->next_node;
                 free(tmp);
