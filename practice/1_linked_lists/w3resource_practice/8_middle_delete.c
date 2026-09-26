@@ -6,12 +6,36 @@ typedef struct node {
     struct node *next_node;
 } node;
 
-void create_list(int length);
+node *create_list(int length);
+void print_list(node *list);
 node *list_length(node *list);
 node *list_middle(node *list);
 node *delete_middle(node *list);
 
 // Write a program in C to delete a node from the middle of a Singly Linked List.
 int main(void) {
+    int list_length = 10;
+    node *list = create_list(list_length);
+}
 
+node *create_list(int length){
+    node *list = NULL;
+    int node_size = sizeof(node);
+    for (int i = 0; i < length; i++) {
+        node *n = malloc(node_size);
+        if (n == NULL) {
+            printf("Error allocating memory when creating list\n");
+            while (list != NULL) {
+                node *tmp = list;
+                list = tmp->next_node;
+                free(tmp);
+            }
+            return NULL;
+        }
+        n->integer = i + 1;
+        n->next_node = list;
+        list = n;
+    }
+
+    return list;
 }
