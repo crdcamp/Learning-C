@@ -39,3 +39,12 @@ node *create_list(int length){
 
     return list;
 }
+
+void print_list(node *list) {
+    node *ptr = list;
+    while (ptr != NULL) {
+        printf("%i ", ptr->integer);
+        node *next_node = ptr->next_node;
+        ptr = next_node;
+    }
+}
