@@ -3,11 +3,6 @@
 #include <stdlib.h>
 
 // https://www.youtube.com/watch?v=G0_I-ZF0S38
-// Reverse a singly linked linked_list
-// Input: 1->2->3->4->5->NULL
-// Output: 5->4->3->2->1->NULL
-// A linked linked_list can be revered either iteratively or recursively
-
 typedef struct node {
     int integer;
     struct node *next_pointer;
@@ -21,8 +16,7 @@ void free_linked_list(node *linked_list);
 // Functions for reversing the linked list
 node *iterative_reverse_linked_list(node *first_pointer);
 
-// NOTE that we're only allocating the original linked list to the heap here
-// The reversed linked lists are not
+// Reverse a singly linked linked_list
 int main(int argc, char *argv[]) {
     // Ensure only one parameter is provided
     if (argc != 2) {

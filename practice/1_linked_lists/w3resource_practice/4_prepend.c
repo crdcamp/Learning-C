@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Write a program in C to insert a new node at the beginning of a Singly Linked List.
 typedef struct node {
     int integer;
     struct node *next_node;
@@ -13,6 +12,7 @@ node *sort_list(node *list);
 node *prepend_list(node *list, int value_to_append);
 void free_list(node *list);
 
+// Write a program in C to insert a new node at the beginning of a Singly Linked List.
 int main(void) {
     int length = 5;
     node *list = create_list(length);

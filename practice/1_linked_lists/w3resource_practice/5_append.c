@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Write a program in C to insert a new node at the end of a Singly Linked List.
 typedef struct node {
     int integer;
     struct node *next_node;
@@ -15,6 +14,7 @@ void print_list(char *message, node *list);
 void *sort_list(node *list);
 void *append_list(node *list);
 
+// Write a program in C to insert a new node at the end of a Singly Linked List.
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         printf("Usage: %s `int`\n", argv[0]);

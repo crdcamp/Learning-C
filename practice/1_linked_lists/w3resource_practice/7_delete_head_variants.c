@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Write a program in C to delete the first node of a Singly Linked List.
-// Some reason I keep changing my variable names for the node pointers
-// cause I can't seems to decide what the best convention for that is
 typedef struct node {
     int integer;
     struct node *next_node;
@@ -14,6 +11,9 @@ void print_list(char *message, node *list);
 node *delete_head(node *list);
 void free_list(node *list);
 
+// Write a program in C to delete the first node of a Singly Linked List.
+// Some reason I keep changing my variable names for the node pointers
+// cause I can't seems to decide what the best convention for that is
 int main(void) {
     int list_length = 5;
 

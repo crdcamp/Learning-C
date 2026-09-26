@@ -1,7 +1,5 @@
 #include <stdio.h>
-
 #include <stdlib.h>
-// Write a program in C to insert a node in the middle of a Singly Linked List.
 
 typedef struct node {
     int integer;
@@ -15,6 +13,7 @@ int get_list_length(node *list);
 node *insert_middle(node *list, int value_to_insert);
 void free_list(node *list);
 
+// Write a program in C to insert a node in the middle of a Singly Linked List.
 int main(void) {
     // Now we're gonna work with multiple lengths just to
     // be absolutely certain we're doing this right
