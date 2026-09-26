@@ -64,8 +64,10 @@ void print_list(char *message, node *list) {
 }
 
 node *delete_head(node *list) {
-    // Think we can just free the
-    // memory of the first node
+    if (list == NULL) {
+        printf("Empty list was passed. Nothing to delete");
+        return NULL;
+    }
     node *head = list;
     list = head->next_node;
     free(head);
