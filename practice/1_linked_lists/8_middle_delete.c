@@ -16,6 +16,9 @@ node *delete_middle(node *list);
 int main(void) {
     int list_length = 10;
     node *list = create_list(list_length);
+    printf("Original list: ");
+    print_list(list);
+    printf("\n");
 }
 
 node *create_list(int length){
@@ -48,3 +51,9 @@ void print_list(node *list) {
         ptr = next_node;
     }
 }
+
+// I think I might just make a function where you enter the
+// index you want to delete and call it all good with these
+// somewhat silly problem types
+// Actually, let's just do that in another file and call it "bonus"
+// or something like that

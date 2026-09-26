@@ -9,7 +9,7 @@ typedef struct node {
 node *create_list(int length);
 void print_list(char *message, node *list);
 node *sort_list(node *list);
-node *prepend_list(node *list, int value_to_append);
+node *prepend_list(node *list, int value_to_prepend);
 void free_list(node *list);
 
 // Write a program in C to insert a new node at the beginning of a Singly Linked List.
@@ -75,20 +75,20 @@ node *sort_list(node *list) {
     return previous_node;
 }
 
-node *prepend_list(node *list, int value_to_append) {
+node *prepend_list(node *list, int value_to_prepend) {
     // Allocate memory for the node to append
-    node *appended_node = malloc(sizeof(node));
-    if (appended_node == NULL) {
+    node *prepended_node = malloc(sizeof(node));
+    if (prepended_node == NULL) {
         // No need for all that mumbo jumbo. The original list isn't edited at all
         printf("Error allocating memory during list creation\n");
         return list;
     }
     // Insert integer value from function parameter into node to append
-    appended_node->integer = value_to_append;
+    prepended_node->integer = value_to_prepend;
     // Ensure that the appended element points to the original first element
-    appended_node->next_node = list;
+    prepended_node->next_node = list;
     // Finally, append dat node
-    list = appended_node;
+    list = prepended_node;
     return list;
 }
 
