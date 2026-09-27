@@ -11,11 +11,10 @@ int main(void) {
 }
 
 void print_array_elements(int array[], int element, int length) {
-
-    if (element > length) {
+    if (element >= length) {
         return;
     }
 
     printf("Element %i = %i\n", element, array[element]);
-    print_array_elements(&array[element], element + 1, length);
+    print_array_elements(array, element + 1, length);
 }
