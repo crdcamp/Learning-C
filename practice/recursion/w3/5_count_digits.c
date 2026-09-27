@@ -10,6 +10,8 @@ int main(void) {
     printf("Loop result:\n");
     int digit_sum_loop = sum_digits_loop(integer);
 
+    printf("\n");
+
     printf("Recursion result:\n");
     int digit_sum_recursion = sum_digits_recursion(integer);
 
@@ -33,5 +35,9 @@ int sum_digits_loop(int integer) {
 }
 
 int sum_digits_recursion(int integer) {
+    if (integer != 0) {
+        return 0;
+    }
 
+    return sum_digits_loop(integer % 10);
 }
