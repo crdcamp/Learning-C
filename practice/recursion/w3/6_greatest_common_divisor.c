@@ -1,11 +1,7 @@
 #include <stdio.h>
 
-int find_greatest_common_divisor(int number);
-
-int main(void) {
-    return 0;
-}
-
-int find_greatest_common_divisor(int number) {
-    return 0;
-}
+// Write a program in C to find the GCD of two numbers using recursion.
+//..... the fuck! This is way too difficult. Fuck this I haven't done math
+// in forever.
+// Then the next problem is to just find the largest array element1!?!?!?!
+// Who the fuck decided on this rollercoaster pacing this is ridiculous!

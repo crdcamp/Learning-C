@@ -9,8 +9,6 @@ int main(void) {
     printf("Original integer: %i\n", integer);
 
     int digit_sum_loop = sum_digits_loop(integer);
-    printf("Loop result: %i\n", digit_sum_loop);
-
     int digit_sum_recursion = sum_digits_recursion(integer);
     printf("Recursion result: %i\n", digit_sum_recursion);
 
