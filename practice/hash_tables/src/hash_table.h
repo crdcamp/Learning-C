@@ -1,7 +1,7 @@
 // This is where out key-item values will be stored (obviously)
 typedef struct {
     char *key;
-    char *vale;
+    char *value;
 } ht_item;
 
 // The hash table stores an array of pointers to items and some
