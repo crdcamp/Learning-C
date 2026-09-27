@@ -1,1 +1,1 @@
-https://www.w3resource.com/c-programming-exercises/hash/index.php
+We'll be following along with this leeson: https://github.com/jamesroutley/write-a-hash-table
