@@ -6,38 +6,33 @@ int sum_digits_recursion(int integer);
 // Write a program in C to find the sum of digits of a number using recursion.
 int main(void) {
     int integer = 25;
+    printf("Original integer: %i\n", integer);
 
-    printf("Loop result:\n");
     int digit_sum_loop = sum_digits_loop(integer);
+    printf("Loop result: %i\n", digit_sum_loop);
 
-    printf("\n");
-
-    printf("Recursion result:\n");
     int digit_sum_recursion = sum_digits_recursion(integer);
+    printf("Recursion result: %i\n", digit_sum_recursion);
 
     return 0;
 }
 
 int sum_digits_loop(int integer) {
-    printf("Original integer: %i\n", integer);
     int digit;
     int sum = 0;
     do {
         digit = integer % 10;
         sum += digit;
-        printf("Digit: %i\n", digit);
         integer /= 10;
     }
     while (integer != 0);
-
-    printf("Sum of digits: %i\n", sum);
     return sum;
 }
 
 int sum_digits_recursion(int integer) {
     if (integer != 0) {
-        return 0;
+        return integer;
     }
 
-    return sum_digits_loop(integer % 10);
+    return integer + sum_digits_recursion(integer % 10);
 }
