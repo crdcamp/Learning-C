@@ -30,9 +30,8 @@ int sum_digits_loop(int integer) {
 }
 
 int sum_digits_recursion(int integer) {
-    if (integer != 0) {
-        return integer;
+    if (integer == 0) {
+        return 0;
     }
-
-    return integer + sum_digits_recursion(integer % 10);
+    return (integer % 10) + sum_digits_recursion(integer / 10);
 }
