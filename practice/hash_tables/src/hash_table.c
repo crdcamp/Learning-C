@@ -5,6 +5,16 @@
 
 #include "hash_table.h"
 
+static ht_item* ht_new_item(const char *k, const char *v);
+ht_hash_table *ht_new();
+static void ht_del_item(ht_item *i);
+void ht_del_hash_table(ht_hash_table *ht);
+
+int main(void) {
+    ht_hash_table *ht = ht_new();
+    ht_del_hash_table(ht);
+}
+
 // Here we define some initialization and deletion functions for
 // `ht_item`s. This, as you might've guessed, is where we initialize
 // some linked lists
