@@ -6,10 +6,15 @@
 
 #include "hash_table.h"
 
+#define HT_INITIAL_BASE_SIZE 53
+#define HT_PRIME_1 163
+#define HT_PRIME_2 157
+
 static ht_item* ht_new_item(const char *k, const char *v);
 ht_hash_table *ht_new();
 static void ht_del_item(ht_item *i);
 void ht_del_hash_table(ht_hash_table *ht);
+static int ht_get_hash(const char *s, const int num_buckets, const int attempt);
 
 int main(void) {
     ht_hash_table *ht = ht_new();
@@ -108,14 +113,14 @@ void ht_del_hash_table(ht_hash_table *ht) {
 // The resulting variable should be a prime number larger than the size of
 // the alphabet. Since we're hashing ASCII strings, which has an alphabet size
 // of 128, we should chose a prime number larger than that
-static int hf_hash(const char *s, const int a, const int m) {
+static int ht_hash(const char *s, const int a, const int m) {
     long hash = 0;
     const int len_s = strlen(s);
     for (int i = 0; i < len_s; i++) {
         // Get the has value by providing some arithmetic that's
         // a bit annoying to figure out the reasoning behind it
         hash += (long)pow(a, len_s - (i+1)) * s[i];
-        // Get the remainder which is the actual hash value
+        // Get the remainder by dividing my number of buckets
         hash = hash % m;
     }
     // Return the hash number casted as an integer
@@ -128,3 +133,16 @@ static int hf_hash(const char *s, const int a, const int m) {
 // the same value. To find this set of inputs you'd need to run a bunch of data
 // through the hash function into the hash table (pretty straightforward).
 // All inputs which hash to a particular bucket form a pathological set
+
+// This obviously ties into collisions.
+// Our hash table will handle collisions using a technique called "open addressing"
+// with double hashing. Double hashing makes use of two hash functions to calculate
+// the index an item should be stored after `i` collisions
+static int ht_get_hash(const char *s, const int num_buckets, const int attempt) {
+    // Convert hashes into indices to find
+    const int hash_a = ht_hash(s, HT_PRIME_1, num_buckets);
+    const int hash_b = ht_hash(s, HT_PRIME_2, num_buckets);
+    // Since it's possible that `hash_b` will return 0, we add 1
+    // to avoid inserting items into the same bucket over and over
+    return (hash_a + (attempt * (hash_b + 1))) % num_buckets;
+}
