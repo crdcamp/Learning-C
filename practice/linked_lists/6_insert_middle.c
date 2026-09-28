@@ -29,6 +29,11 @@ int main(void) {
         print_list("", lists[i]);
     }
 
+    for (int i = 0; i < list_lengths_length; i++) {
+        int len = get_list_length(lists[i]);
+        printf("List length: %i\n", len);
+    }
+
     printf("AFTER INSERTING MIDDLE VALUE:\n");
     for (int i = 0; i < list_lengths_length; i++) {
         printf("List %i: ", i + 1);
