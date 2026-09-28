@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "hash_table.h"
 
@@ -93,6 +94,30 @@ void ht_del_hash_table(ht_hash_table *ht) {
             ht_del_item(item);
         }
     }
+    // Remember that item's is a list of allocated memory (an array created with `calloc`)
+    // This is why we need to free it independently of the hash table itself
     free(ht->items);
     free(ht);
+}
+
+// Now it's time for us to create a hash function
+// This hash function will convert the input string to an integer
+// and reduce the size of the integer to a fixed range by taking
+// its remainder (in other words, pretty much the most basic of hash functions)
+
+// The resulting variable should be a prime number larger than the size of
+// the alphabet. Since we're hashing ASCII strings, which has an alphabet size
+// of 128, we should chose a prime number larger than that
+static int hf_hash(const char *s, const int a, const int m) {
+    long hash = 0;
+    const int len_s = strlen(s);
+    for (int i = 0; i < len_s; i++) {
+        // Get the has value by providing some arithmetic that's
+        // a bit annoying to figure out the reasoning behind it
+        hash += (long)pow(a, len_s - (i+1)) * s[i];
+        // Get the remainder which is the actual hash value
+        hash = hash % m;
+    }
+    // Return the hash number casted as an integer
+    return (int)hash;
 }
