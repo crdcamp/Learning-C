@@ -121,3 +121,10 @@ static int hf_hash(const char *s, const int a, const int m) {
     // Return the hash number casted as an integer
     return (int)hash;
 }
+
+// As you know, a hash function ideally always returns an even distribution, yet
+// this tends to be a pretty complicated thing to do
+// For any hash distribution, there's a "pathological" set of inputs, which all hash
+// the same value. To find this set of inputs you'd need to run a bunch of data
+// through the hash function into the hash table (pretty straightforward).
+// All inputs which hash to a particular bucket form a pathological set
