@@ -1,3 +1,5 @@
+#include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -14,12 +16,20 @@
 // called by code internal to the hash table
 static ht_item* ht_new_item(const char *k, const char *v) {
     ht_item *i = malloc(sizeof(ht_item));
+    if (i == NULL) {
+        printf("Error allocating memory for `ht_item`\n");
+        return NULL;
+    }
     // `strdup` returns a pointer to a string, which is a duplicate of the string ("string duplicate")
     // pointed to by the input
     // The space for the new string is obtained as if `malloc` was invoked
     // THE RETURNED POINTER MUST BE FREED TO AVOID A MEMORY LEAK
-    // Do they ever need to free the string, or no? Since we're storing
-    // data here, I'm assuming freeing won't be necessary
+    // Since we're dealing with data storage here, the only time we're
+    // freeing anything is when we delete it. So... we're probably
+    // gonna get to that later
+
+    // Apparently the usage of `strdup` here is some form of defensive
+    // programming. Something to do with ownership
     i->key = strdup(k);
     i->value = strdup(v);
     return i;
@@ -31,5 +41,21 @@ static ht_item* ht_new_item(const char *k, const char *v) {
 
 // `size` defines how many items we can store, which we're fixing at
 // 53 for now (more on that later)
-// We also use `calloc` here to fill the array with NULL bytes, as we
-// use NULL to define a hash table as empty
+// We also initialize an array of items with `calloc` to fill the
+// array with NULL bytes, as we use NULL indicate a bucket is empty
+ht_hash_table *ht_new() {
+    ht_hash_table *ht = malloc(sizeof(ht_hash_table));
+    ht->size = 53;
+    ht->count = 0;
+    // `calloc`'s first argument is number of elements in the array
+    // you're allocating for
+    // Thus, the second argument is the size in bytes of each
+    // element in that array
+
+    // `size_t` can store the maximum size of a theoretically
+    // possible object of any type (including array)
+    // `calloc`'s first argument only accepts type `size_t`,
+    // which (obviously) is why we need to use it here
+    ht->items = calloc((size_t)ht->size, sizeof(ht_item*));
+    return ht;
+}
