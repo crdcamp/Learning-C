@@ -54,6 +54,11 @@ ht_hash_table *ht_new() {
 
     // `size_t` can store the maximum size of a theoretically
     // possible object of any type (including array)
+
+    // I think it's just a data type that's basically an int?
+    // Regardless, it's what the `sizeof` operator always returns,
+    // so I'm not sure why they'd use it here at all
+
     // `calloc`'s first argument only accepts type `size_t`,
     // which (obviously) is why we need to use it here
     ht->items = calloc((size_t)ht->size, sizeof(ht_item*));
