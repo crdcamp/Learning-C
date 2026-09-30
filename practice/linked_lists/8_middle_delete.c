@@ -1,4 +1,3 @@
-#include <iterator>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,12 +17,15 @@ int main(void) {
 
     printf("Original list: ");
     print_list(list);
-    printf("\n");
 
     int list_length = get_list_length(list);
     printf("List length: %i\n", list_length);
 
     node *middle_node = delete_list_middle(list);
+    printf("After middle deletion: ");
+    print_list(list);
+    list_length = get_list_length(list);
+    printf("New list length: %i\n", list_length);
 }
 
 node *create_list(int length){
@@ -55,6 +57,7 @@ void print_list(node *list) {
         node *next_node = ptr->next_node;
         ptr = next_node;
     }
+    printf("\n");
 }
 
 // I think I might just make a function where you enter the
@@ -77,14 +80,24 @@ node *delete_list_middle(node *list) {
     node *previous_node = NULL;
     int middle_index = get_list_length(list) / 2;
 
-    for (int i = 0; i <= middle_index; i++) {
+    // Iterate up until right before the middle index so
+    // you can adjust the pointers
+    for (int i = 0; i < middle_index -1; i++) {
         previous_node = current_node;
-        printf("Current index: %i\n", i);
         printf("Current node value: %i\n", current_node->integer);
-        printf("Previous node value: %i\n", previous_node->integer);
-        printf("\n");
         current_node = current_node->next_node;
-        }
+    }
+    // Define the middle node
+    node *middle_node = current_node->next_node;
 
-    return  current_node;
+    // Redo ze linkage
+    previous_node->next_node = current_node;
+    current_node->next_node = middle_node->next_node;
+
+    printf("Middle node value: %i\n", middle_node->integer);
+    free(middle_node);
+    // Connect the pointers before freeing the middle node
+
+
+    return list;
 }
