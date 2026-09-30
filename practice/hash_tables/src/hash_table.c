@@ -154,6 +154,8 @@ static int ht_get_hash(const char *s, const int num_buckets, const int attempt) 
     return (hash_a + (attempt * (hash_b + 1))) % num_buckets;
 }
 
+// YOU'RE GONNA WANT TO REVIEW THIS BEFORE CONTINUING
+// I BARELY HAVE ANY IDEA WHAT'S GOING ON HERE
 // Now let's work on insertion, searching, and deletion
 void ht_insert(ht_hash_table *ht, const char *key, const char *value) {
     // Create the new item to insert

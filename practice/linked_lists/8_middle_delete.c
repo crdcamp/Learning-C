@@ -1,3 +1,4 @@
+#include <iterator>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,6 +22,8 @@ int main(void) {
 
     int list_length = get_list_length(list);
     printf("List length: %i\n", list_length);
+
+    node *middle_node = delete_list_middle(list);
 }
 
 node *create_list(int length){
@@ -71,11 +74,17 @@ int get_list_length(node *list) {
 
 node *delete_list_middle(node *list) {
     node *current_node = list;
-    int current_index = 0;
+    node *previous_node = NULL;
     int middle_index = get_list_length(list) / 2;
 
-    while (current_index != middle_index) {
-        current_index++;
+    for (int i = 0; i <= middle_index; i++) {
+        previous_node = current_node;
+        printf("Current index: %i\n", i);
+        printf("Current node value: %i\n", current_node->integer);
+        printf("Previous node value: %i\n", previous_node->integer);
+        printf("\n");
         current_node = current_node->next_node;
-    }
+        }
+
+    return  current_node;
 }
