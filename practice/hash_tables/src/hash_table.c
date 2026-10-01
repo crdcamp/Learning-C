@@ -20,8 +20,6 @@ void ht_del_hash_table(ht_hash_table *ht);
 static int ht_get_hash(const char *s, const int num_buckets, const int attempt);
 // Update
 void ht_insert(ht_hash_table *ht, const char *key, const char *value);
-char *ht_search(ht_hash_table *ht, const char *key);
-void ht_delete(ht_hash_table *ht, const char *key);
 
 int main(void) {
     ht_hash_table *ht = ht_new();
@@ -154,23 +152,21 @@ static int ht_get_hash(const char *s, const int num_buckets, const int attempt) 
     return (hash_a + (attempt * (hash_b + 1))) % num_buckets;
 }
 
-// YOU'RE GONNA WANT TO REVIEW THIS BEFORE CONTINUING
-// I BARELY HAVE ANY IDEA WHAT'S GOING ON HERE
-// Now let's work on insertion, searching, and deletion
+// To insert a new key-value pair, we iterate through indexes until
+// we find an empty bucket. When then insert the item into that bucket
+// and increment the hash table's `count` attribute.
+// The `count` value will become useful when we look at resizing
 void ht_insert(ht_hash_table *ht, const char *key, const char *value) {
-    // Create the new item to insert
     ht_item *item = ht_new_item(key, value);
-    // Create an index value to designate where in the hash
-    // table the item will be stored
     int index = ht_get_hash(item->key, ht->size, 0);
-    ht_item *cur_item = ht->items[index];
-
+    ht_item *cur_item = ht->items[index]; // Linked list type shi being used right here I'm pretty sure
     int i = 1;
     while (cur_item != NULL) {
         index = ht_get_hash(item->key, ht->size, i);
         cur_item = ht->items[index];
         i++;
-        ht->items[index] = item;
-        ht->count++;
     }
+    //
+    ht->items[index] = item;
+    ht->count++;
 }
