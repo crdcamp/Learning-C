@@ -18,9 +18,10 @@ int main(void) {
     TreeNode *root = new_tree_node(1);
 
     // Make 10 test nodes and insert them into the tree
-    TreeNode *test_nodes[] = {};
-    for (int i = 2; i < 11; i++) {
-        TreeNode *test_node = insert_tree_node(root, i);
+    int test_nodes[] = {5, 3, 8, 1, 4, 7, 9};
+    int length = sizeof(test_nodes) / sizeof(test_nodes[0]);
+    for (int i = 0; i < length; i++) {
+        TreeNode *test_node = insert_tree_node(root, test_nodes[i]);
     }
 
     // Print the tree
@@ -54,25 +55,18 @@ TreeNode *insert_tree_node(TreeNode *root, int value) {
     // If the provided value is larger than the current
     // node's value, send it right
     if (value > root->data) {
-        root->right = insert_tree_node(root, value);
+        root->right = insert_tree_node(root->right, value);
     }
 
     // If the provided value is smaller than the current
     // node's value, send it left
     if (value < root->data) {
-        root->left = insert_tree_node(root, value);
-    }
-
-    if (value == root->data) {
-        return root;
+        root->left = insert_tree_node(root->left, value);
     }
 
     return root;
 }
 
 void print_tree(TreeNode *root) {
-    if (root == NULL) {
-        printf("No data found in root\n");
-        return;
-    }
+
 }
