@@ -9,7 +9,7 @@ typedef struct TreeNode {
 
 TreeNode *new_tree_node(int value);
 TreeNode *insert_tree_node(TreeNode *root, int value);
-void print_tree(TreeNode *root);
+void print_tree(TreeNode *root, int depth);
 void free_tree(TreeNode *root);
 
 // Write a C program that creates a binary tree. Allow users to input nodes and build a binary tree structure.
@@ -25,7 +25,9 @@ int main(void) {
     }
 
     // Print the tree
+    print_tree(root, 1);
 
+    free_tree(root);
 
     return 0;
 }
@@ -67,6 +69,24 @@ TreeNode *insert_tree_node(TreeNode *root, int value) {
     return root;
 }
 
-void print_tree(TreeNode *root) {
+void print_tree(TreeNode *root, int depth) {
+    if (root == NULL) {
+        return;
+    }
+    printf("enter %i\n", root->data);
+    printf("leave %i\n", root->data);
 
+    printf("%*sDepth %i: Node value = %i\n", depth * 4, "", depth, root->data);
+
+    print_tree(root->left, depth + 1);
+    print_tree(root->right, depth + 1);
+}
+
+void free_tree(TreeNode *root) {
+    if (root == NULL) return;
+
+    free_tree(root->left);
+    free_tree(root->right);
+
+    free(root);
 }
