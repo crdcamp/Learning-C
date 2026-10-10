@@ -75,17 +75,12 @@ node *insert(node *tree, int data) {
         return NewNode(data);
     }
 
-    // Handle what happens if the data is equal
-    if (data == tree->data) {
-        return tree;
-    }
-
-    // Otherwise, recur down the tree
-    else if (data <= tree->data) {
-        tree->left = insert(tree->left, data);
+    // Otherwise, recur down the tree (this allows for duplicates)
+    if (data <= tree->data) {
+        tree->left = insert(tree, data);
     }
     else if (data >= tree->data) {
-        tree->right = insert(tree->right, data);
+        tree->right = insert(tree, data);
     }
 
     return tree;
