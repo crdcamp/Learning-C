@@ -10,21 +10,20 @@ typedef struct TreeNode {
 TreeNode *new_tree_node(int value);
 TreeNode *insert_tree_node(TreeNode *root, int value);
 void print_tree(TreeNode *root);
+void free_tree(TreeNode *root);
 
 // Write a C program that creates a binary tree. Allow users to input nodes and build a binary tree structure.
 int main(void) {
     // Make the root of the tree
-    // (could easily just be done in the loop, but I'm doing this for clarity)
     TreeNode *root = new_tree_node(1);
 
-    // Make 10 test nodes
+    // Make 10 test nodes and insert them into the tree
     TreeNode *test_nodes[] = {};
     for (int i = 2; i < 11; i++) {
-        TreeNode *test_node = new_tree_node(i);
-        test_nodes[i] = test_node;
+        TreeNode *test_node = insert_tree_node(root, i);
     }
 
-    // Populate the tree with the test nodes
+    // Print the tree
 
 
     return 0;
@@ -69,4 +68,11 @@ TreeNode *insert_tree_node(TreeNode *root, int value) {
     }
 
     return root;
+}
+
+void print_tree(TreeNode *root) {
+    if (root == NULL) {
+        printf("No data found in root\n");
+        return;
+    }
 }
