@@ -16,6 +16,10 @@ typedef struct node {
     struct node *right;
 } node;
 
+static int lookup(struct node *node, int target);
+struct node *NewNode(int data);
+node *insert(node *tree, int data);
+
 // Search a binary tree to see if it contains the target value
 // Deal with the base case where the tree is empty
 // Deal with the current node
@@ -34,4 +38,55 @@ static int lookup(struct node *node, int target) {
         return lookup(node->left, target);
     }
     else return lookup(node->right, target);
+}
+
+// POINTER CHANGING CODE
+// What if a function needs to change one of the pointer parameters
+// passed to it? For example, an `insert()` function may want to
+// We can use pointers to pointers (aka "reference parameters")
+// But, we're gonna use a simpler technique that a function that
+// wishes to change a pointer passed to it will return the new value
+// of the pointer to the caller. The caller is responsible for using
+// the new value
+
+// Suppose we have  a `change()` function that may change the
+// root, then a call to `change()` will look like this:
+// root = change(root);
+
+// We take the value returned by `change()` and use it a the new
+// value for root.
+
+// INSERT
+// `insert()` returns the new tree pointer to use to its caller
+struct node *NewNode(int data) {
+    node *new_node = malloc(sizeof(node));
+
+    new_node->data = data;
+    new_node->left = NULL;
+    new_node->right = NULL;
+
+    return new_node;
+}
+
+// Now we can create the insert function
+node *insert(node *tree, int data) {
+    // If the tree is empty, return a new, single node
+    if (tree == NULL) {
+        return NewNode(data);
+    }
+
+    // Handle what happens if the data is equal
+    if (data == tree->data) {
+        return tree;
+    }
+
+    // Otherwise, recur down the tree
+    else if (data <= tree->data) {
+        tree->left = insert(tree->left, data);
+    }
+    else if (data >= tree->data) {
+        tree->right = insert(tree->right, data);
+    }
+
+    return tree;
 }
