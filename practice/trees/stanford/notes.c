@@ -77,10 +77,10 @@ node *insert(node *tree, int data) {
 
     // Otherwise, recur down the tree (this allows for duplicates)
     if (data <= tree->data) {
-        tree->left = insert(tree, data);
+        tree->left = insert(tree->left, data);
     }
     else if (data >= tree->data) {
-        tree->right = insert(tree, data);
+        tree->right = insert(tree->right, data);
     }
 
     return tree;
