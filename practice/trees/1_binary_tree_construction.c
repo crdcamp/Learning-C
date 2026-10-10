@@ -9,7 +9,7 @@ typedef struct TreeNode {
 
 TreeNode *new_tree_node(int value);
 TreeNode *insert_tree_node(TreeNode *root, int value);
-void print_
+void print_tree(TreeNode *root);
 
 // Write a C program that creates a binary tree. Allow users to input nodes and build a binary tree structure.
 int main(void) {
