@@ -109,6 +109,8 @@ node *insert_node(node *tree, int data) {
         new_node(data);
     }
 
+    // Not a huge fan of not explicitly stating both cases here
+    // Will fix in next problem
     // Less-than case
     if (data <= tree->data) tree->left = insert_node(tree->left, data);
     // More-than case
