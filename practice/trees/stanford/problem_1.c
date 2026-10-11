@@ -18,6 +18,7 @@ void print_all_sections(char section);
 // A) by calling new_node three times using three pointer variables
 // B) by calling new_node three times using only one pointer variable
 // C) by calling insert three times passing it the root pointer to build the tree
+// (The error handling here is less than ideal, but we'll improve on it in the next question)
 int main(void) {
     // Create the root
     node *root = NULL;
