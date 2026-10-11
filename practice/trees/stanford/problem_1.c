@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,33 +16,43 @@ void print_all_sections(char section);
 
 // Write code that builds a binary tree with the values 1, 2, and 3
 // Write the code in three different ways:
-// a) by calling new_node three times using three pointer variables
-// b) by calling new_node three times using only one pointer variable
-// c) by calling insert three times passing it the root pointer to build the tree
+// A) by calling new_node three times using three pointer variables
+// B) by calling new_node three times using only one pointer variable
+// C) by calling insert three times passing it the root pointer to build the tree
 int main(void) {
     // Create the root
     node *root = NULL;
 
-    // Input array for section C
+    // Input array for section B and C
     int tree_data[] = {2, 1, 3};
     int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
 
-    // a) Call new_node three times using three pointer variables
-    node *node1 = new_node(1);
-    node *node2 = new_node(2);
+    // A) Call new_node three times using three pointer variables
+    node *node1 = new_node(2);
+    node *node2 = new_node(1);
     node *node3 = new_node(3);
+    // Insert node1
+    root = node1;
+    // Insert node2
+    if (node1->data <= root->data) root->left = node2;
+    else if (node1->data >= root->data) root->right = node2;
+    // Insert node3
+    if (node3->data <= root->data) root->left = node3;
+    else if (node3->data >= root->data) root->right = node3;
+    // Free all nodes
+    free(root->left);
+    free(root->right);
+    free(root);
 
-    free(node1);
-    free(node2);
-    free(node3);
+    root = NULL;
 
-    // b) Call new_node three times using only one pointer variable
+    // B) Call new_node three times using only one pointer variable
     for (int i = 0; i < tree_data_len; i++) {
         node *single_pointer = new_node(tree_data[i]);
         free(single_pointer);
     }
 
-    // c) Call insert three times passing it the root pointer to build the tree
+    // C) Call insert three times passing it the root pointer to build the tree
     for (int i = 0; i < tree_data_len; i++) {
         root = insert_node(root, tree_data[i]);
     }
