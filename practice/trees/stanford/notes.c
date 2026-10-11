@@ -76,12 +76,13 @@ node *insert(node *tree, int data) {
     }
 
     // Otherwise, recur down the tree (this allows for duplicates)
-    if (data <= tree->data) {
-        tree->left = insert(tree->left, data);
-    }
-    else if (data >= tree->data) {
-        tree->right = insert(tree->right, data);
-    }
+    if (data <= tree->data) tree->left = insert(tree->left, data);
+    else if (data >= tree->data) tree->right = insert(tree->right, data);
 
     return tree;
 }
+
+// The shape of a binary tree depends on the order that the nodes
+// are inserted. In particular, if the nodes are inserted in
+// increasing order, the tree nodes just grow to the right leasing
+// to a linked list shape where all the left pointers are NULL
