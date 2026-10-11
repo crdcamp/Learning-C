@@ -21,7 +21,7 @@ int main(void) {
     int input_array_len = sizeof(input_array) / sizeof(input_array[0]);
     for (int i = 0; i < input_array_len; i++) {
         root = insert_node(root, input_array[i]);
-        // Definitely bad error handling. Should probably just check the entire tree after it's created
+        // Definitely bad error handling. Pretty sure this doesn't handle all branches
         if (root == NULL) {
             printf("Error allocating memory for `new_node` on iteration %i. `data` = %i\n", i, input_array[i]);
             return 1;
@@ -46,8 +46,11 @@ node *new_node(int data) {
 
 node *insert_node(node *tree, int data) {
     // If the tree is empty, fill it with the data value
-    if (tree == NULL) new_node(data);
+    if (tree == NULL) {
+        return new_node(data);
+    }
 
+    // Otherwise, recursively fill the tree
     if (data <= tree->data) tree->left = insert_node(tree->left, data);
     else if (data >= tree->data) tree->right = insert_node(tree->right, data);
 
