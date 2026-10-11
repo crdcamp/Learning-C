@@ -56,6 +56,7 @@ int main(void) {
     free_tree(root);
     root = NULL;
 
+
     // C) Call insert three times passing it the root pointer to build the tree
     int tree_data[] = {2, 1, 3};
     int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
