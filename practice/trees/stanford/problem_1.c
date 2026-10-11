@@ -9,21 +9,28 @@ typedef struct node {
 
 node *new_node(int data);
 node *insert_node(node *tree, int data);
+void print_tree(node *root, int level);
 
 // Write code that builds a binary tree with the values 1, 2, and 3
 // Write the code in three different ways:
-// by calling new_node three times, and using three pointer variables
-// by calling new_node three times, and using only one pointer variable
-// by calling insert three times passing it the root pointer to build the tree
+// a) by calling new_node three times, and using three pointer variables
+// b) by calling new_node three times, and using only one pointer variable
+// c) by calling insert three times passing it the root pointer to build the tree
 int main(void) {
-    // Create the tree and fill dat uhp
+    // Create the root
     node *root;
+
+    // a) Call new_node three times, and using three pointer variables
+
+    // b) Call new_node three times, and using only one pointer variable
+
+    // c) Call insert three times passing it the root pointer to build the tree
     int tree_data[] = {1, 2, 3};
     int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
 
-    for (int i = 0; i < tree_data_len; i++) {
-        insert_node(root, i);
-    }
+    insert_node(root, 1);
+
+    print_tree(root, 4);
 
     return 0;
 }
@@ -55,4 +62,15 @@ node *insert_node(node *tree, int data) {
     else if (tree->data >= data) tree->right = insert_node(tree->right, data);
 
     return tree;
+}
+
+void print_tree(node *root, int level)
+{
+        if (root == NULL)
+                return;
+        for (int i = 0; i < level; i++)
+                printf(i == level - 1 ? "|-" : "  ");
+        printf("%d\n", root->data);
+        print_tree(root->left, level + 1);
+        print_tree(root->right, level + 1);
 }
