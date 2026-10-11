@@ -11,17 +11,22 @@ node *new_node(int data);
 node *insert_node(node *tree, int data);
 void print_tree(node *root, int level);
 void free_tree(node *root);
+void print_all_sections(char section);
 
 // Write code that builds a binary tree with the values 1, 2, and 3
 // Write the code in three different ways:
-// a) by calling new_node three times, and using three pointer variables
-// b) by calling new_node three times, and using only one pointer variable
+// a) by calling new_node three times using three pointer variables
+// b) by calling new_node three times using only one pointer variable
 // c) by calling insert three times passing it the root pointer to build the tree
 int main(void) {
     // Create the root
     node *root = NULL;
 
-    // a) Call new_node three times, and using three pointer variables
+    // Input array for section C
+    int tree_data[] = {2, 1, 3};
+    int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
+
+    // a) Call new_node three times using three pointer variables
     node *node1 = new_node(1);
     node *node2 = new_node(2);
     node *node3 = new_node(3);
@@ -30,27 +35,19 @@ int main(void) {
     free(node2);
     free(node3);
 
-    // b) Call new_node three times, and using only one pointer variable
+    // b) Call new_node three times using only one pointer variable
+    for (int i = 0; i < tree_data_len; i++) {
+        node *single_pointer = new_node(tree_data[i]);
+        free(single_pointer);
+    }
 
     // c) Call insert three times passing it the root pointer to build the tree
-    int tree_data[] = {2, 1, 3};
-    int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
-
     for (int i = 0; i < tree_data_len; i++) {
         root = insert_node(root, tree_data[i]);
     }
-
-    printf("Section A:\n");
     print_tree(root, 4);
-    printf("\n\n");
-
-    printf("Section B:\n");
-    print_tree(root, 4);
-    printf("\n\n");
-
-    printf("Section C:\n");
-    print_tree(root, 4);
-    printf("\n\n");
+    free_tree(root);
+    root = NULL;
 
     return 0;
 }
