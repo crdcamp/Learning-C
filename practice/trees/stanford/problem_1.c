@@ -25,7 +25,7 @@ int main(void) {
     // b) Call new_node three times, and using only one pointer variable
 
     // c) Call insert three times passing it the root pointer to build the tree
-    int tree_data[] = {7, 5, 8, 1, 2, 3};
+    int tree_data[] = {1, 2, 3};
     int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
 
     for (int i = 0; i < tree_data_len; i++) {
