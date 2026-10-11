@@ -27,6 +27,10 @@ int main(void) {
     node *node1 = new_node(2);
     node *node2 = new_node(1);
     node *node3 = new_node(3);
+    if ((node1 == NULL) || (node2 == NULL) || (node3 == NULL)) {
+        printf("Error allocating memory for `new_node` in  Section A\n");
+        return 1;
+    }
     // Insert node1
     root = node1;
     // Insert node2
@@ -48,6 +52,10 @@ int main(void) {
     root = new_node(2);
     root->left = new_node(1);
     root->right = new_node(3);
+    if ((root == NULL) || (root->left == NULL) || (root->right == NULL)) {
+        printf("Error allocating memory for `new_node` in Section B\n");
+        return 1;
+    }
     // Print ze tree
     printf("Section B:\n");
     print_tree(root, 4);
@@ -62,6 +70,10 @@ int main(void) {
     int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
     for (int i = 0; i < tree_data_len; i++) {
         root = insert_node(root, tree_data[i]);
+        if (root == NULL) {
+            printf("Error allocating memory for `new_node` in Section C\n");
+            return 1;
+        }
     }
     printf("Section C:\n");
     print_tree(root, 4);
@@ -77,7 +89,7 @@ node *new_node(int data) {
     // First, we need to allocate memory for the new node
     node *new_node = malloc(sizeof(node));
     if (new_node == NULL) {
-        printf("Error allocating memory for `new_node`\n");
+        return NULL;
     }
 
     // Now, we need to populate new_node with the data and
@@ -93,13 +105,13 @@ node *new_node(int data) {
 node *insert_node(node *tree, int data) {
     // If the tree is empty, return a new node
     if (tree == NULL) {
-        return new_node(data);
+        new_node(data);
     }
 
     // Less-than case
     if (data <= tree->data) tree->left = insert_node(tree->left, data);
     // More-than case
-    else if (data >= tree->data) tree->right = insert_node(tree->right, data);
+    else tree->right = insert_node(tree->right, data);
 
     return tree;
 }
