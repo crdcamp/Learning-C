@@ -40,5 +40,10 @@ node *insert_node(node *tree, int data) {
         return new_node(data);
     }
 
+    // Less-than case
+    if (tree->data <= data) tree->left = insert_node(tree->left, data);
+    // More-than case
+    else if (tree->data >= data) tree->right = insert_node(tree->right, data);
 
+    return tree;
 }
