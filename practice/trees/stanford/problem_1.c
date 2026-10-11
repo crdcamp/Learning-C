@@ -27,6 +27,7 @@ int main(void) {
     int tree_data[] = {2, 1, 3};
     int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
 
+
     // A) Call new_node three times using three pointer variables
     node *node1 = new_node(2);
     node *node2 = new_node(1);
@@ -43,8 +44,8 @@ int main(void) {
     free(root->left);
     free(root->right);
     free(root);
-
     root = NULL;
+
 
     // B) Call new_node three times using only one pointer variable
     for (int i = 0; i < tree_data_len; i++) {
@@ -67,6 +68,9 @@ int main(void) {
 node *new_node(int data) {
     // First, we need to allocate memory for the new node
     node *new_node = malloc(sizeof(node));
+    if (new_node == NULL) {
+        printf("Error allocating memory for `new_node`\n");
+    }
 
     // Now, we need to populate new_node with the data and
     // fill left and right with NULL
