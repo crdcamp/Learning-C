@@ -16,6 +16,15 @@ node *insert_node(node *tree, int data);
 // by calling new_node three times, and using only one pointer variable
 // by calling insert three times passing it the root pointer to build the tree
 int main(void) {
+    // Create the tree and fill dat uhp
+    node *root;
+    int tree_data[] = {1, 2, 3};
+    int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
+
+    for (int i = 0; i < tree_data_len; i++) {
+        insert_node(root, i);
+    }
+
     return 0;
 }
 
