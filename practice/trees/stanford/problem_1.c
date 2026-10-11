@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,10 +22,6 @@ int main(void) {
     // Create the root
     node *root = NULL;
 
-    // Input array for section B and C
-    int tree_data[] = {2, 1, 3};
-    int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
-
 
     // A) Call new_node three times using three pointer variables
     node *node1 = new_node(2);
@@ -35,29 +30,41 @@ int main(void) {
     // Insert node1
     root = node1;
     // Insert node2
-    if (node1->data <= root->data) root->left = node2;
-    else if (node1->data >= root->data) root->right = node2;
+    if (node2->data <= root->data) root->left = node2;
+    else root->right = node2;
     // Insert node3
     if (node3->data <= root->data) root->left = node3;
-    else if (node3->data >= root->data) root->right = node3;
+    else root->right = node3;
+    // Print the tree
+    printf("Section A:\n");
+    print_tree(root, 4);
+    printf("\n\n");
     // Free all nodes
-    free(root->left);
-    free(root->right);
-    free(root);
+    free_tree(root);
     root = NULL;
 
 
     // B) Call new_node three times using only one pointer variable
-    for (int i = 0; i < tree_data_len; i++) {
-        node *single_pointer = new_node(tree_data[i]);
-        free(single_pointer);
-    }
+    root = new_node(2);
+    root->left = new_node(1);
+    root->right = new_node(3);
+    // Print ze tree
+    printf("Section B:\n");
+    print_tree(root, 4);
+    printf("\n\n");
+    // Free all nodes
+    free_tree(root);
+    root = NULL;
 
     // C) Call insert three times passing it the root pointer to build the tree
+    int tree_data[] = {2, 1, 3};
+    int tree_data_len = sizeof(tree_data) / sizeof(tree_data[0]);
     for (int i = 0; i < tree_data_len; i++) {
         root = insert_node(root, tree_data[i]);
     }
+    printf("Section C:\n");
     print_tree(root, 4);
+    printf("\n\n");
     free_tree(root);
     root = NULL;
 
