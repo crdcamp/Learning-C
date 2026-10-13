@@ -36,7 +36,7 @@ int main(void) {
     int depth = max_depth(root);
     printf("Max depth = %i\n", depth);
 
-    //free_tree(root);
+    free_tree(root);
 
     return 0;
 }
@@ -95,5 +95,13 @@ int max_depth(node *tree_node) {
     }
     else {
         return max_right + 1;
+    }
+}
+
+void free_tree(node *root) {
+    if (root != NULL) {
+        free_tree(root->left);
+        free_tree(root->right);
+        free(root);
     }
 }
