@@ -19,7 +19,7 @@ void free_tree(node *root);
 int main(void) {
     // Create the tree
     node *root = NULL;
-    int input_array[] = {4, 2, 1, 3, 5};
+    int input_array[] = {4, 2, 1, 3, 5, 6, 7, 8, 9};
     int input_array_len = sizeof(input_array) / sizeof(input_array[0]);
     for (int i = 0; i < input_array_len; i++) {
         root = insert_node(root, input_array[i]);
@@ -32,6 +32,11 @@ int main(void) {
     }
 
     print_tree(root, 4);
+
+    int depth = max_depth(root);
+    printf("Max depth = %i\n", depth);
+
+    //free_tree(root);
 
     return 0;
 }
@@ -73,4 +78,18 @@ void print_tree(node *root, int level) {
         printf("%d\n", root->data);
         print_tree(root->left, level + 1);
         print_tree(root->right, level + 1);
+}
+
+int max_depth(node *tree_node) {
+    if (tree_node == NULL) {
+        return 0;
+    }
+
+    // Switching these statements does return the correct depth
+    // of the side of the tree that is returned first
+
+    // So, we're on the right path, but how do we return the
+    // greater depth?
+    return max_depth(tree_node->right) + 1;
+    return max_depth(tree_node->left) + 1;
 }
