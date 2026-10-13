@@ -2,14 +2,15 @@
 #include <stdlib.h>
 typedef struct node {
 
-    int data;
     struct node *left;
+    int data;
     struct node *right;
 } node;
 
 node *new_node(int data);
 node *insert_node(node *new_node, int data);
 int max_depth(node *tree_node);
+void print_tree(node *root, int level);
 void free_tree(node *root);
 
 // Given a binary tree, compute its "max depth" - the number of nodes
@@ -21,7 +22,7 @@ int main(void) {
     int input_array[] = {4, 2, 1, 3, 5};
     int input_array_len = sizeof(input_array) / sizeof(input_array[0]);
     for (int i = 0; i < input_array_len; i++) {
-        insert_node(root, input_array[i]);
+        root = insert_node(root, input_array[i]);
         // Still using insufficient error handling for tree creation
         // We'll work on that after we've completed all problems
         if (root == NULL) {
@@ -29,6 +30,8 @@ int main(void) {
             return 0;
         }
     }
+
+    print_tree(root, 4);
 
     return 0;
 }
@@ -60,4 +63,14 @@ node *insert_node(node *tree, int data) {
     }
 
     return tree;
+}
+
+void print_tree(node *root, int level) {
+        if (root == NULL)
+                return;
+        for (int i = 0; i < level; i++)
+                printf(i == level - 1 ? "|-" : "  ");
+        printf("%d\n", root->data);
+        print_tree(root->left, level + 1);
+        print_tree(root->right, level + 1);
 }
