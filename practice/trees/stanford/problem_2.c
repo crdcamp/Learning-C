@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,4 +73,6 @@ int tree_size(node *root) {
     if (root == NULL) {
         return 0;
     }
+
+    return tree_size(root->left) + 1 + tree_size(root->right);
 }
