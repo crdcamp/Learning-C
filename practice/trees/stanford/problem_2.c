@@ -74,5 +74,10 @@ int tree_size(node *tree_node) {
         return 0;
     }
 
+    // `tree_size(tree_node->left)` and `tree_size(tree_node->right)` don't actually return
+    // a number by themselves. That's what the `+ 1` is for.
+    // Instead `tree_size(tree_node->left)` and `tree_size(tree_node->right)` are what
+    // continue the recursion down the rest of the tree, while the + 1 handles
+    // the actual count (until, of course, you reach a null node)
     return tree_size(tree_node->left) + 1 + tree_size(tree_node->right);
 }
