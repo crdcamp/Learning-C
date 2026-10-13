@@ -28,6 +28,10 @@ int main(void) {
         }
     }
 
+
+
+    free_tree(root);
+
     return 0;
 }
 
