@@ -20,3 +20,16 @@ int main(void) {
 
     return 0;
 }
+
+node *new_node(int data) {
+    node *new_node = malloc(sizeof(node));
+    if (new_node == NULL) {
+        return NULL;
+    }
+
+    new_node->left = NULL;
+    new_node->right = NULL;
+    new_node->data = data;
+
+    return new_node;
+}
