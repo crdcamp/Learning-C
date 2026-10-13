@@ -10,7 +10,7 @@ typedef struct node {
 node *new_node(int data);
 node *insert_node(node *tree, int data);
 void free_tree(node *root);
-int size(node *tree);
+int tree_size(node *tree);
 
 // This problem demonstrates simple binary tree traversal.
 // Given a binary tree, count the number of nodes in the tree.
@@ -55,4 +55,12 @@ node *insert_node(node *tree, int data) {
     else if (data >= tree->data) tree->right = insert_node(tree->right, data);
 
     return tree;
+}
+
+void free_tree(node *root) {
+    if (root != NULL) {
+        free_tree(root->left);
+        free_tree(root->right);
+        free(root);
+    }
 }
