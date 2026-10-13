@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,7 +10,7 @@ typedef struct node {
 
 node *new_node(int data);
 node *insert_node(node *tree, int data);
-int tree_size(node *tree);
+int tree_size(node *root);
 void free_tree(node *root);
 
 // This problem demonstrates simple binary tree traversal.
@@ -28,8 +29,8 @@ int main(void) {
         }
     }
 
-
-
+    int size = tree_size(root);
+    printf("Tree size = %i\n", size);
     free_tree(root);
 
     return 0;
@@ -66,5 +67,11 @@ void free_tree(node *root) {
         free_tree(root->left);
         free_tree(root->right);
         free(root);
+    }
+}
+
+int tree_size(node *root) {
+    if (root == NULL) {
+        return 0;
     }
 }
