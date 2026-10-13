@@ -9,7 +9,7 @@ typedef struct node {
 
 node *new_node(int data);
 node *insert_node(node *tree, int data);
-int tree_size(node *root);
+int tree_size(node *tree_node);
 void free_tree(node *root);
 
 // This problem demonstrates simple binary tree traversal.
@@ -69,10 +69,10 @@ void free_tree(node *root) {
     }
 }
 
-int tree_size(node *root) {
-    if (root == NULL) {
+int tree_size(node *tree_node) {
+    if (tree_node == NULL) {
         return 0;
     }
 
-    return tree_size(root->left) + 1 + tree_size(root->right);
+    return tree_size(tree_node->left) + 1 + tree_size(tree_node->right);
 }
