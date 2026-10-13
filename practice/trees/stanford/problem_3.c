@@ -85,11 +85,15 @@ int max_depth(node *tree_node) {
         return 0;
     }
 
-    // Switching these statements does return the correct depth
-    // of the side of the tree that is returned first
+    // This time you need to initialize variables
+    // You initially thought these would get overwritten, but they don't!
+    int max_left = max_depth(tree_node->left);
+    int max_right = max_depth(tree_node->right);
 
-    // So, we're on the right path, but how do we return the
-    // greater depth?
-    return max_depth(tree_node->right) + 1;
-    return max_depth(tree_node->left) + 1;
+    if (max_left > max_right) {
+        return max_left + 1;
+    }
+    else {
+        return max_right + 1;
+    }
 }
