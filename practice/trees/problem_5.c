@@ -74,7 +74,7 @@ void print_sorted_tree(node *tree) {
     }
 
     // Recurse left and print
-    printf("Left value = %i\n", tree->data);
+    printf("%i ", tree->data);
     print_sorted_tree(tree->left);
     print_sorted_tree(tree->right);
 }
