@@ -9,6 +9,7 @@ typedef struct node {
 
 node *new_node(int data);
 node *insert_node(node *tree, int data);
+void print_sorted_tree(node *tree);
 int *sort_tree(node *tree);
 void free_tree(node *tree);
 
@@ -25,12 +26,16 @@ int main(void) {
         root = insert_node(root, input_array[i]);
     }
 
-    // Create and print the array of the sorted `int`s
-    int *sorted_tree = malloc(input_array_len * sizeof(int));
-    sorted_tree = sort_tree(root);
-    for (int i = 0; i < input_array_len; i++) {
-        printf("%i ", sorted_tree[i]);
-    }
+    print_sorted_tree(root);
+
+
+    // Personal challenge: assign to result to a new array
+    // // Create and print the array of the sorted `int`s
+    // int *sorted_tree = malloc(input_array_len * sizeof(int));
+    // sorted_tree = sort_tree(root);
+    // for (int i = 0; i < input_array_len; i++) {
+    //     printf("%i ", sorted_tree[i]);
+    // }
 
     return 0;
 }
@@ -63,9 +68,25 @@ node *insert_node(node *tree, int data) {
     return tree;
 }
 
-int *sort_tree(node *tree) {
+void print_sorted_tree(node *tree) {
+    if (tree == NULL) {
+        return;
+    }
 
+    // Recurse left and print
+    node *left_node = tree->left;
+    printf(" %i ", left_node->data);
+    print_sorted_tree(left_node);
+
+    // Recurse right and print
+    node *right_node = tree->right;
+    printf(" %i ", right_node->data);
+    print_sorted_tree(right_node);
 }
+
+// int *sort_tree(node *root) {
+
+// }
 
 void free_tree(node *tree) {
     if (tree != NULL) {
