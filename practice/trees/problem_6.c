@@ -25,7 +25,10 @@ void free_tree(node *tree);
 // path equals the given sum. Return false if no such path can be
 // found
 int main(void) {
-    // `int`s are spaced based on tree depth
+    node *tree = custom_tree();
+
+
+    free_tree(tree);
 
     return 0;
 }
