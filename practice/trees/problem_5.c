@@ -25,6 +25,14 @@ int main(void) {
         root = insert_node(root, input_array[i]);
     }
 
+    // Create and print the array of the sorted `int`s
+    int *sorted_tree = malloc(input_array_len * sizeof(int));
+    sorted_tree = sort_tree(root);
+    for (int i = 0; i < input_array_len; i++) {
+        printf("%i ");
+    }
+    printf("\n");
+
     return 0;
 }
 
@@ -57,7 +65,7 @@ node *insert_node(node *tree, int data) {
 }
 
 int *sort_tree(node *tree) {
-    return 0;
+
 }
 
 void free_tree(node *tree) {
