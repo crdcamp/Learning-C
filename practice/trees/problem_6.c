@@ -8,7 +8,7 @@ typedef struct node {
 } node;
 
 node *new_node(int data);
-node *custom_tree(node *new_node, int data);
+node *custom_tree();
 int has_path_sum(node *tree, int sum);
 void free_tree(node *tree);
 
@@ -39,36 +39,23 @@ node *new_node(int data) {
     return new_node;
 }
 
-node *custom_tree(node *new_node, int data) {
+node *custom_tree() {
     // Depth 1 (root)
-    node *root = NULL;
-    root->data = 5;
+    node *root = new_node(5);
 
     // Depth 2
-    node *depth_2_left_node = root->left;
-    depth_2_left_node->data = 4;
-
-    node *depth_2_right_node = root->right;
-    depth_2_right_node->data = 8;
+    root->left = new_node(4);
+    root->right = new_node(8);
 
     // Depth 3
-    // `node_1` corresponds to left, `node_2` corresponds to right
-    node *depth_3_left_node_1 = depth_2_left_node->left;
-    depth_3_left_node_1->data = 11;
-
-    node *depth_3_right_node_1 = depth_2_right_node->left;
-    node *depth_3_right_node_2 = depth_2_right_node->right;
-    depth_3_right_node_1->data = 13;
-    depth_3_right_node_2->data = 4;
+    root->left->left = new_node(11);
+    root->right->left = new_node(13);
+    root->right->right = new_node(4);
 
     // Depth 4
-    node *depth_4_left_node_1 = depth_3_left_node_1->left;
-    node *depth_4_left_node_2 = depth_3_left_node_1->right;
-    depth_4_left_node_1->data = 7;
-    depth_4_left_node_2->data = 2;
-
-    node *depth_4_right_node_2 = depth_3_right_node_2->right;
-    depth_4_right_node_2->data = 1;
+    root->left->left->left = new_node(7);
+    root->left->left->right = new_node(2);
+    root->right->right->right = new_node(1);
 
     return root;
 }
