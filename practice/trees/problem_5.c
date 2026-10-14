@@ -38,6 +38,8 @@ int main(void) {
     //     printf("%i ", sorted_tree[i]);
     // }
 
+    free_tree(root);
+
     return 0;
 }
 
