@@ -27,6 +27,7 @@ int main(void) {
     }
 
     print_sorted_tree(root);
+    printf("\n");
 
 
     // Personal challenge: assign to result to a new array
@@ -74,8 +75,8 @@ void print_sorted_tree(node *tree) {
     }
 
     // Recurse left and print
-    printf("%i ", tree->data);
     print_sorted_tree(tree->left);
+    printf("%i ", tree->data);
     print_sorted_tree(tree->right);
 }
 
