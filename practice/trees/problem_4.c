@@ -9,7 +9,8 @@ typedef struct node {
 
 node *new_node(int data);
 node *insert_node(node *root, int data);
-int find_tree_min(node *tree_node);
+int find_tree_min_recursive(node *tree_node);
+int find_tree_min_loop(node *tree_node);
 void free_tree(node *root);
 
 // Given a non-empty binary search tree, return the minimum data
@@ -25,8 +26,11 @@ int main(void) {
         // Not even bothering inputting my crappy error handling this time
     }
 
-    // int tree_min = int find_tree_min(root);
-    // printf("Tree min = %i\n", tree_min);
+    int tree_min_recursive = find_tree_min_recursive(root);
+    printf("Tree min (recursive) = %i\n", tree_min_recursive);
+
+    int tree_min_loop = find_tree_min_loop(root);
+    printf("Tree min (loop) = %i\n", tree_min_loop);
 
     free_tree(root);
 
@@ -60,9 +64,24 @@ node *insert_node(node *tree, int data) {
     return tree;
 }
 
-// int find_tree_min(node *tree_node) {
+int find_tree_min_recursive(node *tree_node) {
+    if (tree_node->left == NULL) {
+        return tree_node->data;
+    }
 
-// }
+    // All ya gotta do is recurse all the way down the
+    // leftmost side of the tree
+    int tree_min = find_tree_min_recursive(tree_node->left);
+    return tree_min;
+
+}
+
+int find_tree_min_loop(node *tree_node) {
+    while (tree_node->left != NULL) {
+        tree_node = tree_node->left;
+    }
+    return tree_node->data;
+}
 
 void free_tree(node *root) {
     if (root != NULL) {
