@@ -29,9 +29,8 @@ int main(void) {
     int *sorted_tree = malloc(input_array_len * sizeof(int));
     sorted_tree = sort_tree(root);
     for (int i = 0; i < input_array_len; i++) {
-        printf("%i ");
+        printf("%i ", sorted_tree[i]);
     }
-    printf("\n");
 
     return 0;
 }
