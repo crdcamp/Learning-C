@@ -77,11 +77,10 @@ node *custom_tree() {
 }
 
 int find_path_sum(node *tree, int sum) {
-    int left_sum;
-    int right_sum;
-
-
-    return 0;
+    if (tree == NULL) {
+        return find_path_sum(tree->left, sum) + tree->data;
+    }
+    return find_path_sum(tree->left, sum) + tree->data;
 }
 
 // ADD A LOOP ATTEMPT HERE
