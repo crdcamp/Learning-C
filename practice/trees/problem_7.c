@@ -30,8 +30,12 @@ int main(void) {
     int example_sums_len = sizeof(example_sums) / sizeof(example_sums[0]);
 
     // Check if the example sum is found in the tree
-    int result = find_path_sum(root, example_sums[0]);
-    printf("Result: %i\n", result);
+    int result;
+    for (int i = 0; i < example_sums_len; i++) {
+        int example_sum = example_sums[i];
+        result = find_path_sum(root, example_sum);
+        printf("Example sum = %i, result = %i\n", example_sum, result);
+    }
 
     free_tree(root);
 
@@ -73,15 +77,11 @@ node *custom_tree() {
 }
 
 int find_path_sum(node *tree, int sum) {
-    if (find_path_sum(tree->left, sum) == sum) {
-        printf("true\n");
-        return 0;
-    }
-    else if (find_path_sum(tree->right, sum) == sum) {
-        printf("false\n");
-        return 1;
-    }
-    else return 12345;
+    int left_sum;
+    int right_sum;
+
+
+    return 0;
 }
 
 // ADD A LOOP ATTEMPT HERE
