@@ -9,8 +9,8 @@ typedef struct node {
 
 node *new_node(int data);
 node *custom_tree();
-int has_path_sum(node *tree, int sum);
-void free_tree(node *tree);
+int find_path_sum(node *tree, int sum);
+void free_tree(node *root);
 
 // We'll define a "root-to-leaf path" to be a sequence of nodes
 // in a tree starting with the root node and proceeding downward
@@ -20,15 +20,24 @@ void free_tree(node *tree);
 // For this problem, we'll be concerned with the sum of the values
 // of such a path.
 
-// Given a binary tree and a sum, return true if the tree has a
+// Given a binary tree and a sum, return true if the tree find a
 // root-to-leaf path such that adding up all the values along the
 // path equals the given sum. Return false if no such path can be
 // found
 int main(void) {
-    node *tree = custom_tree();
+    node *root = custom_tree();
+    int example_sums[] = {27, 22, 26, 18};
+    int example_sums_len = sizeof(example_sums) / sizeof(example_sums[0]);
+
+    // Check if the example sum is found in the tree
+    for (int i = 0; i < example_sums_len; i++) {
+        int example_sum = example_sums[i];
+        if (example_sum == find_path_sum(root, example_sum)) printf("Example sum = %i, result = %s\n", example_sum, "true");
+        else printf("Example sum = %i, result = %s\n", example_sum, "false");
+    }
 
 
-    free_tree(tree);
+    free_tree(root);
 
     return 0;
 }
@@ -63,7 +72,7 @@ node *custom_tree() {
     return root;
 }
 
-int has_path_sum(node *tree, int sum) {
+int find_path_sum(node *tree, int sum) {
     // Just follow the arrows like you did when
     // You'll need to recurse down every path in
     // the tree and save each result
@@ -71,14 +80,16 @@ int has_path_sum(node *tree, int sum) {
         return 0;
     }
 
+    sum = find_path_sum(tree, sum) + find_path_sum(tree->left, sum) + find_path_sum(tree->right, sum);
+    return sum;
 }
 
 // ADD A LOOP ATTEMPT HERE
 
-void free_tree(node *tree) {
-    if (tree != NULL) {
-        free_tree(tree->left);
-        free_tree(tree->right);
-        free(tree);
+void free_tree(node *root) {
+    if (root != NULL) {
+        free_tree(root->left);
+        free_tree(root->right);
+        free(root);
     }
 }
