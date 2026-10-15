@@ -10,6 +10,7 @@ typedef struct node {
 node *new_node(int data);
 node *custom_tree();
 int find_path_sum(node *tree, int sum);
+void calc_path_sums(node *tree);
 void free_tree(node *root);
 
 // We'll define a "root-to-leaf path" to be a sequence of nodes
@@ -26,7 +27,7 @@ void free_tree(node *root);
 // found
 int main(void) {
     node *root = custom_tree();
-    int example_sums[] = {27, 22, 26, 18};
+    int example_sums[] = {27, 22, 26, 18, 4, 2, 1};
     int example_sums_len = sizeof(example_sums) / sizeof(example_sums[0]);
 
     // Check if the example sum is found in the tree
@@ -77,14 +78,18 @@ node *custom_tree() {
 }
 
 int find_path_sum(node *tree, int sum) {
-    int path_sum;
     if (tree == NULL) {
-        return path_sum;
+        return 0;
     }
-    return path_sum = find_path_sum(tree->left, sum) + tree->data;
-}
 
-// ADD A LOOP ATTEMPT HERE
+    int remaining = sum - tree->data;
+
+    if (tree->left == NULL && tree->right == NULL) {
+        return remaining == 0;
+    }
+
+    return find_path_sum(tree->left, remaining) || find_path_sum(tree->right, remaining);
+}
 
 void free_tree(node *root) {
     if (root != NULL) {
