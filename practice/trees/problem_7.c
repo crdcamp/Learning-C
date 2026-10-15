@@ -30,12 +30,8 @@ int main(void) {
     int example_sums_len = sizeof(example_sums) / sizeof(example_sums[0]);
 
     // Check if the example sum is found in the tree
-    for (int i = 0; i < example_sums_len; i++) {
-        int example_sum = example_sums[i];
-        if (example_sum == find_path_sum(root, example_sum)) printf("Example sum = %i, result = %s\n", example_sum, "true");
-        else printf("Example sum = %i, result = %s\n", example_sum, "false");
-    }
-
+    int test = example_sums[0];
+    int result = find_path_sum(root, example_sums[0]);
 
     free_tree(root);
 
@@ -44,6 +40,10 @@ int main(void) {
 
 node *new_node(int data) {
     node *new_node = malloc(sizeof(node));
+    if (new_node == NULL) {
+        printf("Error allocating memory for `new_node`\n");
+        exit(1);
+    }
     new_node->data = data;
     new_node->left = NULL;
     new_node->right = NULL;
@@ -80,8 +80,9 @@ int find_path_sum(node *tree, int sum) {
         return 0;
     }
 
-    sum = find_path_sum(tree, sum) + find_path_sum(tree->left, sum) + find_path_sum(tree->right, sum);
-    return sum;
+    int result = find_path_sum(tree, sum);
+
+    return result;
 }
 
 // ADD A LOOP ATTEMPT HERE
