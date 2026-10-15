@@ -42,8 +42,7 @@ node *new_node(int data) {
 
 node *custom_tree() {
     // Depth 1
-    node *root;
-    root->data = 4;
+    node *root = new_node(4);
 
     // Depth 2
     root->left = new_node(2);
@@ -57,7 +56,13 @@ node *custom_tree() {
 }
 
 void print_postorder(node *tree_node) {
+    if (tree_node == NULL) {
+        return;
+    }
 
+    print_postorder(tree_node->left);
+    print_postorder(tree_node->right);
+    printf(" %i ", tree_node->data);
 }
 
 void free_tree(node *root) {
