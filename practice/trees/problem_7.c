@@ -73,10 +73,6 @@ node *custom_tree() {
 }
 
 int find_path_sum(node *tree, int sum) {
-    if (tree == NULL) {
-        return sum;
-    }
-
     if (find_path_sum(tree->left, sum) == sum) {
         printf("true\n");
         return 0;
